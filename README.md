@@ -25,3 +25,7 @@ The lock is an [August Wi-Fi Smart Lock](https://august.com/products/august-wifi
 ### Music
 
 I hooked up my Spotify account using this awesome [library](https://github.com/Peter-Schorn/SpotifyAPI). Like the other components, it polls what's currently playing every few seconds, showing the album image, track name, artists, and song progression. Supports an empty state when nothing is playing.
+
+### UI
+
+The UI's design is heavily influenced by listMaven and was created using my favorite app of all time, [Figma](https://www.figma.com).
