@@ -1,0 +1,50 @@
+PODS:
+  - Alamofire (4.8.0)
+  - CocoaAsyncSocket (7.6.3)
+  - Gloss (3.1.0)
+  - Keys (1.0.1)
+  - MarqueeLabel (4.3.0)
+  - SwiftyHue (0.5.9):
+    - SwiftyHue/Base (= 0.5.9)
+    - SwiftyHue/BridgeServices (= 0.5.9)
+  - SwiftyHue/Base (0.5.9):
+    - Alamofire (= 4.8.0)
+    - Gloss (= 3.1.0)
+  - SwiftyHue/BridgeServices (0.5.9):
+    - Alamofire (= 4.8.0)
+    - CocoaAsyncSocket (= 7.6.3)
+    - Gloss (= 3.1.0)
+  - TactileSlider (3.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - Keys (from `Pods/CocoaPodsKeys`)
+  - MarqueeLabel
+  - SwiftyHue
+  - TactileSlider
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - CocoaAsyncSocket
+    - Gloss
+    - MarqueeLabel
+    - SwiftyHue
+    - TactileSlider
+
+EXTERNAL SOURCES:
+  Keys:
+    :path: Pods/CocoaPodsKeys
+
+SPEC CHECKSUMS:
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
+  Gloss: 2dbf87af0e4dd24753f7de933356ff6c5c012426
+  Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
+  MarqueeLabel: 02f5ac8fd6877c94564556cb93fa86c70c08baeb
+  SwiftyHue: d76c2e48f342d47c17572b584d30984be35c3cc4
+  TactileSlider: 29d7ece49b13f921f1c8e0952ffba6c0b9c9d19d
+
+PODFILE CHECKSUM: f47a7b8530878a2657e5bca28e6b671761c3844a
+
+COCOAPODS: 1.11.2
