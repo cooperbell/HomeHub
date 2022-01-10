@@ -84,11 +84,21 @@ class AugustLockService: AugustLockServiceProtocol, LoggerProtocol {
 
     // MARK: - Public properties
 
-    var lockState: LockState?
+    var lockState: LockState? {
+        didSet {
+            if lockState != oldValue {
+                log("Lock State changed: \(lockState?.formattedString ?? "nil")")
+                delegate?.augustLockService(self, lockedStateUpdated: lockState)
+            }
+        }
+    }
 
     var healthy: Bool = false {
         didSet {
-            delegate?.augustLockServiceUpdateHealthStatus(self)
+            if healthy != oldValue {
+                log("Health Status changed: \(healthy)")
+                delegate?.augustLockServiceUpdateHealthStatus(self)
+            }
         }
     }
 
@@ -109,10 +119,7 @@ class AugustLockService: AugustLockServiceProtocol, LoggerProtocol {
         log("Calling endpoint \(path)")
         putAugust(url) { responseBody in
             let lockState = self.getLockStateFromBody(responseBody)
-            if lockState != self.lockState {
-                self.lockState = lockState
-                self.delegate?.augustLockService(self, lockedStateUpdated: self.lockState)
-            }
+            self.lockState = lockState
 
             completion()
         }
@@ -125,10 +132,7 @@ class AugustLockService: AugustLockServiceProtocol, LoggerProtocol {
         putAugust(url) { responseBody in
             if let lockState = self.getLockStateFromBody(responseBody) {
                 self.healthy = true
-                if lockState != self.lockState {
-                    self.lockState = lockState
-                    self.delegate?.augustLockService(self, lockedStateUpdated: self.lockState)
-                }
+                self.lockState = lockState
             } else {
                 self.healthy = false
             }

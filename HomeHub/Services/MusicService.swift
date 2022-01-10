@@ -57,7 +57,10 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
 
     var healthy: Bool = false {
         didSet {
-            delegate?.musicServiceUpdateHealthStatus(self)
+            if healthy != oldValue {
+                log("Health Status changed: \(healthy)")
+                delegate?.musicServiceUpdateHealthStatus(self)
+            }
         }
     }
 

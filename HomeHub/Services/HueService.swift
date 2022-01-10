@@ -81,7 +81,10 @@ class HueService: HueServiceProtocol, LoggerProtocol {
 
     var healthy: Bool = false {
         didSet {
-            delegate?.hueService(self, updateHealthStatus: healthy)
+            if healthy != oldValue {
+                log("Health Status changed: \(healthy)")
+                delegate?.hueService(self, updateHealthStatus: healthy)
+            }
         }
     }
 
@@ -100,7 +103,7 @@ class HueService: HueServiceProtocol, LoggerProtocol {
         log("Updating light \(light.toString) to \(lightState.brightness ?? -1)")
         sendAPI.updateLightStateForId(light.hueID, withLightState: lightState) { error in
             if let error = error {
-                print(error)
+                error.forEach { self.logError($0) }
             }
         }
     }
@@ -129,7 +132,7 @@ class HueService: HueServiceProtocol, LoggerProtocol {
                 self.delegate?.hueService(self, lightsUpdated: self.lights)
             case let .failure(error):
                 self.healthy = false
-                print("Updating light error: \(error.localizedDescription)")
+                self.logError(error)
             }
 
             completion()
