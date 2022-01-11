@@ -5,3 +5,10 @@ extension Error {
         "\(self)"
     }
 }
+
+extension Array where Element == Error {
+    var aggregated: String {
+        map { $0.toString }
+        .joined(separator: ", ")
+    }
+}

@@ -12,13 +12,14 @@
 		141CF402277D11FD007189B6 /* ManageLightViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 141CF400277D11FD007189B6 /* ManageLightViewCell.xib */; };
 		141CF404277D1457007189B6 /* UICollectionView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141CF403277D1457007189B6 /* UICollectionView+Ext.swift */; };
 		141CF406277D194F007189B6 /* ManageLightViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141CF405277D194F007189B6 /* ManageLightViewCellViewModel.swift */; };
-		14805218277E3CF600BE0FD5 /* HueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14805217277E3CF600BE0FD5 /* HueService.swift */; };
+		14805218277E3CF600BE0FD5 /* LightsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14805217277E3CF600BE0FD5 /* LightsService.swift */; };
 		1480521A278211DB00BE0FD5 /* AugustLockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14805219278211DB00BE0FD5 /* AugustLockService.swift */; };
 		149D19E527850406008517DC /* SpotifyAPIWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149D19E427850406008517DC /* SpotifyAPIWrapper.swift */; };
 		149D19EB27850844008517DC /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 149D19EA27850844008517DC /* SpotifyAPI */; };
 		149D19EE2785088A008517DC /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 149D19ED2785088A008517DC /* KeychainAccess */; };
 		149D19F227876763008517DC /* LoggerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149D19F127876763008517DC /* LoggerProtocol.swift */; };
 		149D19F427876796008517DC /* Error+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149D19F327876796008517DC /* Error+Ext.swift */; };
+		149FF007278D24020007EDB9 /* PhillipsHueWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF006278D24020007EDB9 /* PhillipsHueWrapper.swift */; };
 		14B8C45C27833FEF00597DF3 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B8C45B27833FEF00597DF3 /* UIView+Ext.swift */; };
 		14B8C4662783578D00597DF3 /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B8C4652783578D00597DF3 /* MusicService.swift */; };
 		14BF88AB277CDE4600946BAD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BF88AA277CDE4600946BAD /* AppDelegate.swift */; };
@@ -83,11 +84,12 @@
 		141CF400277D11FD007189B6 /* ManageLightViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageLightViewCell.xib; sourceTree = "<group>"; };
 		141CF403277D1457007189B6 /* UICollectionView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Ext.swift"; sourceTree = "<group>"; };
 		141CF405277D194F007189B6 /* ManageLightViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageLightViewCellViewModel.swift; sourceTree = "<group>"; };
-		14805217277E3CF600BE0FD5 /* HueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HueService.swift; sourceTree = "<group>"; };
+		14805217277E3CF600BE0FD5 /* LightsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsService.swift; sourceTree = "<group>"; };
 		14805219278211DB00BE0FD5 /* AugustLockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugustLockService.swift; sourceTree = "<group>"; };
 		149D19E427850406008517DC /* SpotifyAPIWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAPIWrapper.swift; sourceTree = "<group>"; };
 		149D19F127876763008517DC /* LoggerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerProtocol.swift; sourceTree = "<group>"; };
 		149D19F327876796008517DC /* Error+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Ext.swift"; sourceTree = "<group>"; };
+		149FF006278D24020007EDB9 /* PhillipsHueWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhillipsHueWrapper.swift; sourceTree = "<group>"; };
 		14B8C45B27833FEF00597DF3 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		14B8C4652783578D00597DF3 /* MusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
 		14BF88A7277CDE4600946BAD /* HomeHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,7 +192,7 @@
 		14805216277E3CDF00BE0FD5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				14805217277E3CF600BE0FD5 /* HueService.swift */,
+				14805217277E3CF600BE0FD5 /* LightsService.swift */,
 				14805219278211DB00BE0FD5 /* AugustLockService.swift */,
 				14B8C4652783578D00597DF3 /* MusicService.swift */,
 			);
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				149D19E427850406008517DC /* SpotifyAPIWrapper.swift */,
+				149FF006278D24020007EDB9 /* PhillipsHueWrapper.swift */,
 			);
 			path = Wrappers;
 			sourceTree = "<group>";
@@ -515,8 +518,9 @@
 				141CF404277D1457007189B6 /* UICollectionView+Ext.swift in Sources */,
 				14BF88AB277CDE4600946BAD /* AppDelegate.swift in Sources */,
 				149D19E527850406008517DC /* SpotifyAPIWrapper.swift in Sources */,
-				14805218277E3CF600BE0FD5 /* HueService.swift in Sources */,
+				14805218277E3CF600BE0FD5 /* LightsService.swift in Sources */,
 				149D19F227876763008517DC /* LoggerProtocol.swift in Sources */,
+				149FF007278D24020007EDB9 /* PhillipsHueWrapper.swift in Sources */,
 				141CF3FC277D0D5C007189B6 /* HomeViewModel.swift in Sources */,
 				14BF88AD277CDE4600946BAD /* SceneDelegate.swift in Sources */,
 				14B8C4662783578D00597DF3 /* MusicService.swift in Sources */,
