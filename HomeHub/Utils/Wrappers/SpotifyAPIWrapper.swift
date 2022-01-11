@@ -5,7 +5,9 @@ import SwiftUI
 import KeychainAccess
 import SpotifyWebAPI
 
+
 /**
+ https://github.com/Peter-Schorn/SpotifyAPIExampleApp/blob/main/SpotifyAPIExampleApp/Model/Spotify.swift
  A helper class that wraps around an instance of `SpotifyAPI` and provides
  convenience methods for authorizing your application.
 
