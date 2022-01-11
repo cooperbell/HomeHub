@@ -3,6 +3,8 @@ import SwiftyHue
 import Keys
 
 protocol HueServiceProtocol {
+    typealias LightData = [LightType: Light?]
+
     var healthy: Bool { get set }
     var delegate: HueServiceDelegate? { get set }
     
@@ -17,7 +19,7 @@ protocol HueServiceDelegate: AnyObject {
     
     func hueService(
         _ hueService: HueService,
-        lightsUpdated: [LightType: Light]
+        lightsUpdated lightData: [LightType: Int?]
     )
 }
 
@@ -66,7 +68,11 @@ class HueService: HueServiceProtocol, LoggerProtocol {
 
     private lazy var resourceAPI = swiftyHue.resourceAPI
     
-    private var lights: [LightType: Light] = [:]
+    private var lights: LightData = [
+        .foyer: nil,
+        .livingRoom: nil,
+        .office: nil
+    ]
 
     private lazy var bridgeAccessConfig = {
         BridgeAccessConfig(
@@ -117,19 +123,28 @@ class HueService: HueServiceProtocol, LoggerProtocol {
             switch result {
             case let .success(lights):
                 self.healthy = true
-                if let officeLight = lights[LightType.office.hueID]  {
+                if let officeLight = lights[LightType.office.hueID],
+                    officeLight.state.reachable ?? false {
                     self.lights[.office] = officeLight
+                } else {
+                    self.lights[.office] = nil
                 }
                 
-                if let foyerLight = lights[LightType.foyer.hueID]  {
+                if let foyerLight = lights[LightType.foyer.hueID],
+                   foyerLight.state.reachable ?? false {
                     self.lights[.foyer] = foyerLight
+                } else {
+                    self.lights[.foyer] = nil
                 }
                 
-                if let livingRoomLight = lights[LightType.livingRoom.hueID]  {
+                if let livingRoomLight = lights[LightType.livingRoom.hueID],
+                   livingRoomLight.state.reachable ?? false {
                     self.lights[.livingRoom] = livingRoomLight
+                } else {
+                    self.lights[.livingRoom] = nil
                 }
 
-                self.delegate?.hueService(self, lightsUpdated: self.lights)
+                self.propagateUpdatedLightValues()
             case let .failure(error):
                 self.healthy = false
                 self.logError(error)
@@ -145,5 +160,21 @@ class HueService: HueServiceProtocol, LoggerProtocol {
                 self.pollLights()
             }
         }
+    }
+
+    private func propagateUpdatedLightValues() {
+        let newDict: [LightType: Int?] = lights.mapValues {
+            var value: Int?
+            if let light = $0 {
+                value = 0
+                if light.state.on ?? false {
+                    value = Int(light.state.brightness ?? 0)
+                }
+            }
+
+            return value
+        }
+    
+        self.delegate?.hueService(self, lightsUpdated: newDict)
     }
 }

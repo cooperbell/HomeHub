@@ -7,12 +7,14 @@ protocol ManageLightViewCellViewModelProtocol {
     var sliderValue: Float { get set }
     var sliderMinValue: Float { get }
     var sliderMaxValue: Float { get }
+    var sliderImage: UIImage? { get }
+    var controlsEnabled: Bool { get }
     var delegate: ManageLightViewCellViewModelDelegate? { get set }
     var viewControllerDelegate: ManageLightViewCellViewModelViewControllerDelegate? { get set }
     
     func sliderValueChanged(_ value: Float)
     func actionButtonTapped()
-    func updateSliderValue(_ value: Float)
+    func updateSliderValue(_ value: Float?)
     
 }
 
@@ -44,7 +46,12 @@ class ManageLightViewCellViewModel: ManageLightViewCellViewModelProtocol {
     ) {
         self.smartLightData = smartLightData
         self.delegate = delegate
-        self.sliderValue = Float(smartLightData.value ?? 0)
+        if let lightValue = smartLightData.value {
+            self.sliderValue = Float(lightValue)
+        } else {
+            inErrorState = true
+            self.sliderValue = 0
+        }
     }
 
     // MARK: - Private properties
@@ -64,6 +71,8 @@ class ManageLightViewCellViewModel: ManageLightViewCellViewModelProtocol {
 
     private lazy var oldSliderValueKey = "oldSliderValue_\(smartLightData.light.toString)"
 
+    private var inErrorState: Bool = false
+
     // MARK: - Public properties
 
     var titleText: String {
@@ -71,8 +80,16 @@ class ManageLightViewCellViewModel: ManageLightViewCellViewModelProtocol {
     }
 
     var actionButtonImage: UIImage? {
+        guard !inErrorState else {
+            return UIImage(named: "lightUnavailable")
+        }
+
         let imageName = sliderValue > sliderMinValue ? "lightOn" : "lightOff"
         return UIImage(named: imageName)
+    }
+
+    var controlsEnabled: Bool {
+        !inErrorState
     }
 
     var sliderValue: Float {
@@ -84,6 +101,10 @@ class ManageLightViewCellViewModel: ManageLightViewCellViewModelProtocol {
     var sliderMinValue: Float = 0.0
 
     var sliderMaxValue: Float = 254
+
+    var sliderImage: UIImage? {
+        inErrorState ? UIImage(named: "cloudOffline") : nil
+    }
 
     weak var delegate: ManageLightViewCellViewModelDelegate?
 
@@ -114,8 +135,15 @@ class ManageLightViewCellViewModel: ManageLightViewCellViewModelProtocol {
             forLight: smartLightData.light)
     }
     
-    func updateSliderValue(_ value: Float) {
-        sliderValue = value
+    func updateSliderValue(_ value: Float?) {
+        if let value = value {
+            inErrorState = false
+            sliderValue = value
+        } else {
+            inErrorState = true
+            sliderValue = 0
+        }
+
         viewControllerDelegate?.manageLightViewCellViewModelRefreshView(self)
     }
 }

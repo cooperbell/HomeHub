@@ -192,7 +192,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 // MARK: - HomeViewModelViewControllerDelegate
 
 extension HomeViewController: HomeViewModelViewControllerDelegate {
-    func homeViewModel(_ homeViewModel: HomeViewModelProtocol, updateHealthStatusViewFor viewContext: ViewContext) {
+    func homeViewModel(
+        _ homeViewModel: HomeViewModelProtocol,
+        updateHealthStatusViewFor viewContext: ViewContext
+    ) {
         switch viewContext {
         case .lights:
             updateLightsViewHealthStatusView()
@@ -205,7 +208,7 @@ extension HomeViewController: HomeViewModelViewControllerDelegate {
     
     func homeViewModel(
         _ homeViewModel: HomeViewModelProtocol,
-        updateSliderValue value: Float,
+        updateSliderValue value: Float?,
         at indexPath: IndexPath
     ) {
         guard

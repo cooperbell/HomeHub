@@ -6,6 +6,7 @@ class ManageLightViewCell: UICollectionViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var slider: TactileSlider!
+    @IBOutlet weak var sliderImageView: UIImageView!
     @IBOutlet weak var actionButtonImageView: UIImageView!
     @IBOutlet weak var actionButton: UIButton!
     
@@ -37,6 +38,7 @@ class ManageLightViewCell: UICollectionViewCell {
 
     private func setupActionButton() {
         actionButtonImageView.image = viewModel?.actionButtonImage
+        actionButton.isUserInteractionEnabled = viewModel?.controlsEnabled ?? false
     }
 
     private func setupSlider() {
@@ -44,6 +46,26 @@ class ManageLightViewCell: UICollectionViewCell {
         slider.maximum = viewModel?.sliderMaxValue ?? 254
         slider.setValue(viewModel?.sliderValue ?? 0, animated: false)
         slider.addTarget(self, action: #selector(sliderValueChanged(sender:)), for: .valueChanged)
+        slider.isUserInteractionEnabled = viewModel?.controlsEnabled ?? false
+        setupSliderImageView()
+    }
+    
+    private func setupSliderImageView() {
+        guard let sliderImage = viewModel?.sliderImage else {
+            sliderImageView.isHidden = true
+            return
+        }
+        
+        sliderImageView.image = sliderImage
+        sliderImageView.isHidden = false
+    }
+
+    private func refreshView() {
+        actionButtonImageView.image = viewModel?.actionButtonImage
+        slider.setValue(viewModel?.sliderValue ?? 0, animated: true)
+        actionButton.isUserInteractionEnabled = viewModel?.controlsEnabled ?? false
+        slider.isUserInteractionEnabled = viewModel?.controlsEnabled ?? false
+        setupSliderImageView()
     }
 
     // MARK: - Callbacks
@@ -63,7 +85,6 @@ extension ManageLightViewCell: ManageLightViewCellViewModelViewControllerDelegat
     func manageLightViewCellViewModelRefreshView(
         _ manageLightViewCellViewModel: ManageLightViewCellViewModelProtocol
     ) {
-        actionButtonImageView.image = viewModel?.actionButtonImage
-        slider.setValue(viewModel?.sliderValue ?? 0, animated: true)
+        refreshView()
     }
 }

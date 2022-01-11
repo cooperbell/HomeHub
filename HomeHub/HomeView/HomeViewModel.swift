@@ -28,7 +28,7 @@ protocol HomeViewModelViewControllerDelegate: AnyObject {
     )
     func homeViewModel(
         _ homeViewModel: HomeViewModelProtocol,
-        updateSliderValue value: Float,
+        updateSliderValue value: Float?,
         at indexPath: IndexPath
     )
     func homeViewModelUpdateLabels(_ homeViewModel: HomeViewModelProtocol)
@@ -69,7 +69,7 @@ class HomeViewModel: HomeViewModelProtocol {
 
     private var musicService: MusicServiceProtocol!
 
-    private var smartLightDataSource: [(lightType: LightType, light: Light?)] =
+    private var smartLightDataSource: [(lightType: LightType, value: Int?)] =
         [
             (.foyer, nil),
             (.livingRoom, nil),
@@ -153,12 +153,10 @@ class HomeViewModel: HomeViewModelProtocol {
         at indexPath: IndexPath
     ) -> ManageLightViewCellViewModelProtocol? {
         let dataSourceElement = smartLightDataSource[indexPath.row]
-        var brightness: Int = 0
-        if let light = dataSourceElement.light, light.state.on ?? false {
-            brightness = light.state.brightness ?? 0
-        }
+        let light = dataSourceElement.lightType
+        let brightness = dataSourceElement.value
 
-        let smartLightData = SmartLightData(light: dataSourceElement.lightType, value: brightness)
+        let smartLightData = SmartLightData(light: light, value: brightness)
         return ManageLightViewCellViewModel(smartLightData: smartLightData, delegate: self)
     }
 
@@ -204,29 +202,78 @@ extension HomeViewModel: HueServiceDelegate {
 
     func hueService(
         _ hueService: HueService,
-        lightsUpdated lightData: [LightType : Light]
+        lightsUpdated lightData: [LightType: Int?]
     ) {
-        lightData.forEach { dictElement in
-            let index = smartLightDataSource.firstIndex {
-                $0.lightType == dictElement.key
-            }
-
-            if let index = index {
-                let currentLightState = smartLightDataSource[index].light?.state
-                let newLightState = dictElement.value.state
-                if currentLightState?.brightness != newLightState.brightness ||
-                    currentLightState?.on != newLightState.on {
-                    smartLightDataSource[index].light = dictElement.value
-                    var value: Float = 0.0
-                    if dictElement.value.state.on ?? false {
-                        value = Float(newLightState.brightness ?? 0)
-                    }
-                    let indexPath = IndexPath(row: index, section: 0)
-                    viewControllerDelegate?.homeViewModel(self, updateSliderValue: value, at: indexPath)
-                }
-            }
+        smartLightDataSource.enumerated().forEach { (index, _) in
+            updateLightIfNeeded(at: index, lightData: lightData )
         }
     }
+    
+    private func updateLightIfNeeded(
+        at index: Int,
+        lightData: [LightType: Int?]
+    ) {
+        let indexPath = IndexPath(row: index, section: 0)
+        let lightType = smartLightDataSource[index].lightType
+        guard
+            let value = lightData[lightType],
+            let newLightValue = value
+        else {
+            smartLightDataSource[index].value = nil
+            viewControllerDelegate?.homeViewModel(self, updateSliderValue: nil, at: indexPath)
+            return
+        }
+        
+        let currentLightValue = smartLightDataSource[index].value
+        smartLightDataSource[index].value = newLightValue
+        
+        guard currentLightValue != newLightValue else {
+            return
+        }
+
+        let sliderValue = Float(newLightValue)
+        viewControllerDelegate?.homeViewModel(self, updateSliderValue: sliderValue, at: indexPath)
+    }
+    
+//    private func updateLightIfNeeded(
+//        forType lightType: LightType,
+//        lightData: [LightType: Int?]
+//    ) {
+//
+//        guard
+//            let lightValue = lightData[lightType],
+//            let index = smartLightDataSource
+//                .firstIndex(where: { $0.lightType == lightType })
+//        else {
+//            smartLightDataSource[index].value = nil
+//            let indexPath = IndexPath(row: index, section: 0)
+//            viewControllerDelegate?.homeViewModel(self, updateSliderValue: nil, at: indexPath)
+//            return
+//        }
+//
+//        let currentLightValue = smartLightDataSource[index].value
+//
+//        guard
+//            let newLightValue = lightData.value
+//        else {
+//            // show bad state here
+//            let indexPath = IndexPath(row: index, section: 0)
+//            viewControllerDelegate?.homeViewModel(self, updateSliderValue: nil, at: indexPath)
+//            smartLightDataSource[index].value = nil
+//            return
+//        }
+//
+//        smartLightDataSource[index].value = newLightValue
+//
+//        guard currentLightValue != newLightValue else {
+//            return
+//        }
+//
+//        let value = Float(newLightValue)
+//        let indexPath = IndexPath(row: index, section: 0)
+//
+//        viewControllerDelegate?.homeViewModel(self, updateSliderValue: value, at: indexPath)
+//    }
 }
 
 // MARK: - AugustLockServiceDelegate

@@ -76,12 +76,21 @@
                             <action selector="actionButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="HNT-ZR-cpn"/>
                         </connections>
                     </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloudOffline" translatesAutoresizingMaskIntoConstraints="NO" id="1Tm-nS-bwA">
+                        <rect key="frame" x="63.5" y="142.5" width="26" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="26" id="Ybr-lz-HR8"/>
+                            <constraint firstAttribute="width" secondItem="1Tm-nS-bwA" secondAttribute="height" multiplier="1:1" id="ecx-56-gvP"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="Tfq-eg-Pzv" firstAttribute="leading" secondItem="Rap-qZ-nHw" secondAttribute="leading" constant="10" id="1Rh-hz-SSs"/>
+                <constraint firstItem="1Tm-nS-bwA" firstAttribute="centerX" secondItem="Tfq-eg-Pzv" secondAttribute="centerX" id="3Wb-kZ-WNZ"/>
                 <constraint firstItem="0T6-Qm-XI1" firstAttribute="top" secondItem="Tfq-eg-Pzv" secondAttribute="bottom" constant="33" id="ALa-FH-4qx"/>
+                <constraint firstItem="1Tm-nS-bwA" firstAttribute="centerY" secondItem="Tfq-eg-Pzv" secondAttribute="centerY" id="Egk-Gn-wuf"/>
                 <constraint firstItem="Rap-qZ-nHw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="24" id="Hby-2v-WcQ"/>
                 <constraint firstItem="Tfq-eg-Pzv" firstAttribute="top" secondItem="Rap-qZ-nHw" secondAttribute="bottom" constant="25" id="OOg-xi-wrp"/>
                 <constraint firstItem="Rap-qZ-nHw" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Uvt-J2-25P"/>
@@ -97,12 +106,14 @@
                 <outlet property="actionButton" destination="WOe-Ie-DVa" id="Lhz-hw-OSB"/>
                 <outlet property="actionButtonImageView" destination="0T6-Qm-XI1" id="vf1-Ps-EEC"/>
                 <outlet property="slider" destination="Tfq-eg-Pzv" id="2b6-2N-EN4"/>
+                <outlet property="sliderImageView" destination="1Tm-nS-bwA" id="0eW-tE-hLA"/>
                 <outlet property="titleLabel" destination="Rap-qZ-nHw" id="6xd-t3-wbT"/>
             </connections>
             <point key="canvasLocation" x="207.97101449275365" y="226.00446428571428"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="cloudOffline" width="25" height="21"/>
         <image name="lightOn" width="28" height="28"/>
     </resources>
 </document>
