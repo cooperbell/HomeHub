@@ -18,6 +18,7 @@ protocol HomeViewModelProtocol {
     
     func numberOfItemsInSection(_ section: Int) -> Int
     func getManageLightViewCellViewModel(at indexPath: IndexPath) -> ManageLightViewCellViewModelProtocol?
+    func getMusicFullScreenViewModel() -> MusicFullScreenViewModelProtocol
     func lockActionButtonTapped()
 }
 
@@ -158,6 +159,10 @@ class HomeViewModel: HomeViewModelProtocol {
 
         let smartLightData = SmartLightData(light: light, value: brightness)
         return ManageLightViewCellViewModel(smartLightData: smartLightData, delegate: self)
+    }
+
+    func getMusicFullScreenViewModel() -> MusicFullScreenViewModelProtocol {
+        MusicFullScreenViewModel(trackInfo: musicService.trackInfo)
     }
 
     func lockActionButtonTapped() {
