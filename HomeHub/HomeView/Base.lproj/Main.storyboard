@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad10_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -197,13 +197,13 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All the Debts I Owe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQ8-dZ-Khq" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                                <rect key="frame" x="94" y="425" width="198.5" height="26"/>
+                                                <rect key="frame" x="94" y="425" width="350" height="26"/>
                                                 <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="22"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aeh-88-5Q1" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                                <rect key="frame" x="94" y="466" width="198.5" height="22.5"/>
+                                                <rect key="frame" x="94" y="466" width="350" height="22.5"/>
                                                 <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="19"/>
                                                 <color key="textColor" red="0.61960784313725492" green="0.65098039215686276" blue="0.73725490196078436" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -228,13 +228,13 @@
                                         <constraints>
                                             <constraint firstItem="g3U-LP-O4T" firstAttribute="trailing" secondItem="HNQ-xU-fKB" secondAttribute="trailing" id="5Q2-1m-wv3"/>
                                             <constraint firstItem="iQ8-dZ-Khq" firstAttribute="leading" secondItem="HNQ-xU-fKB" secondAttribute="leading" id="AOB-eH-E9L"/>
+                                            <constraint firstItem="iQ8-dZ-Khq" firstAttribute="trailing" secondItem="HNQ-xU-fKB" secondAttribute="trailing" id="Fkr-pm-9mz"/>
                                             <constraint firstItem="Aeh-88-5Q1" firstAttribute="trailing" secondItem="iQ8-dZ-Khq" secondAttribute="trailing" id="KYk-66-fL1"/>
                                             <constraint firstItem="Aeh-88-5Q1" firstAttribute="leading" secondItem="iQ8-dZ-Khq" secondAttribute="leading" id="OzM-Nz-7jk"/>
                                             <constraint firstItem="myc-Cx-bJk" firstAttribute="leading" secondItem="QDx-aY-pak" secondAttribute="leading" constant="15" id="RaQ-T0-Qaf"/>
                                             <constraint firstItem="HNQ-xU-fKB" firstAttribute="centerX" secondItem="QDx-aY-pak" secondAttribute="centerX" id="Swb-KV-SG3"/>
                                             <constraint firstItem="myc-Cx-bJk" firstAttribute="top" secondItem="QDx-aY-pak" secondAttribute="top" constant="15" id="Tix-qc-2ox"/>
                                             <constraint firstItem="g3U-LP-O4T" firstAttribute="top" secondItem="Aeh-88-5Q1" secondAttribute="bottom" constant="40" id="VN6-nm-5Ks"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iQ8-dZ-Khq" secondAttribute="trailing" constant="30" id="Vqv-Cq-ALl"/>
                                             <constraint firstItem="Aeh-88-5Q1" firstAttribute="top" secondItem="iQ8-dZ-Khq" secondAttribute="bottom" constant="15" id="cGP-tr-Ukb"/>
                                             <constraint firstItem="HNQ-xU-fKB" firstAttribute="top" secondItem="QDx-aY-pak" secondAttribute="top" constant="45" id="os1-uj-Vlw"/>
                                             <constraint firstItem="iQ8-dZ-Khq" firstAttribute="top" secondItem="HNQ-xU-fKB" secondAttribute="bottom" constant="30" id="pBX-Hj-TJ9"/>

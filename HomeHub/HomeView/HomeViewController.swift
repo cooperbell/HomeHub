@@ -114,14 +114,16 @@ class HomeViewController: UIViewController {
 
         musicAlbumCoverImageView.applyCornerRadius(10)
 
+        musicViewSongTitleLabel.speed = .rate(50)
         musicViewSongTitleLabel.textColor = .offWhite
+        musicViewSongTitleLabel.fadeLength = 5
         musicViewSongTitleLabel.type = .leftRight
-        musicViewSongTitleLabel.animationDelay = 3
-        musicViewSongTitleLabel.trailingBuffer = 20
+        musicViewSongTitleLabel.animationDelay = 2.5
         
+        musicViewArtistLabel.speed = .rate(50)
+        musicViewArtistLabel.fadeLength = 5
         musicViewArtistLabel.type = .leftRight
-        musicViewArtistLabel.animationDelay = 3
-        musicViewArtistLabel.trailingBuffer = 20
+        musicViewArtistLabel.animationDelay = 2.5
 
         musicViewProgressView.trackTintColor = .disabledGrayDark
         musicViewProgressView.progressTintColor = .offWhite

@@ -57,14 +57,23 @@ class MusicFullScreenViewController: UIViewController {
     }
     
     private func setupLabels() {
+        songTitleLabel.speed = .rate(50)
         songTitleLabel.textColor = .offWhite
+        songTitleLabel.fadeLength = 5
         songTitleLabel.type = .leftRight
-
-        artistLabel.textColor = .grayBlue
+        songTitleLabel.animationDelay = 2.5
+        
+        artistLabel.speed = .rate(50)
+        artistLabel.fadeLength = 5
         artistLabel.type = .leftRight
+        artistLabel.animationDelay = 2.5
+        artistLabel.textColor = .grayBlue
 
         albumNameLabel.textColor = .grayBlue
+        albumNameLabel.speed = .rate(50)
+        albumNameLabel.fadeLength = 5
         albumNameLabel.type = .leftRight
+        albumNameLabel.animationDelay = 2.5
     }
     
     private func setupProgressView() {
