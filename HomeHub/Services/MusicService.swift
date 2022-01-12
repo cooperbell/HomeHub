@@ -22,6 +22,7 @@ protocol MusicServiceDelegate: AnyObject {
 
 struct TrackInfo {
     var name: String?
+    var albumName: String?
     var artist: String?
     var image: UIImage?
     var progress: Float?
@@ -146,6 +147,7 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         durationMS: Int?
     ) {
         trackInfo.name = name
+        trackInfo.albumName = track.album?.name
 
         if let artists = track.artists {
             let artistNames = artists
@@ -224,16 +226,6 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         .sink(receiveCompletion: { completion in
             if case .failure(let error) = completion {
                 self.logError(error)
-                let alertTitle: String
-                let alertMessage: String
-                if let authError = error as? SpotifyAuthorizationError,
-                   authError.accessWasDenied {
-                    alertTitle = "Authorization Request Denied"
-                    alertMessage = ""
-                }
-                else {
-                    self.logError(error)
-                }
             } else {
                 self.pollCurrentlyPlaying()
             }

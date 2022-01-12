@@ -4,8 +4,9 @@ import UIKit
 protocol MusicFullScreenViewModelProtocol {
     var albumCoverImage: UIImage? { get }
     var songTitleText: String? { get }
+    var albumNameText: String? { get }
     var artistNameText: String? { get }
-    var songProgressionValue: Float? { get }
+    var songProgress: Float? { get }
 }
 
 class MusicFullScreenViewModel: MusicFullScreenViewModelProtocol {
@@ -29,11 +30,15 @@ class MusicFullScreenViewModel: MusicFullScreenViewModelProtocol {
         trackInfo.name
     }
     
+    var albumNameText: String? {
+        trackInfo.albumName
+    }
+
     var artistNameText: String? {
         trackInfo.artist
     }
     
-    var songProgressionValue: Float? {
+    var songProgress: Float? {
         trackInfo.progress
     }
 }

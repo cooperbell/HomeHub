@@ -57,9 +57,9 @@ class MusicFullScreenViewController: UIViewController {
     }
     
     private func setTextOnLabels() {
-        songTitleLabel.text = viewModel?.songTitleText // "Send the Fisherman"
-        artistLabel.text = viewModel?.artistNameText // "Caamp"
-        albumNameLabel.text = "Boys (Side B)"
+        songTitleLabel.text = viewModel?.songTitleText
+        artistLabel.text = viewModel?.artistNameText
+        albumNameLabel.text = viewModel?.albumNameText
     }
     
     private func updateAlbumCover() {
@@ -67,7 +67,7 @@ class MusicFullScreenViewController: UIViewController {
     }
 
     private func updateProgressView() {
-        songProgressionProgressView.progress = viewModel?.songProgressionValue ?? 0.0 // 0.5
+        songProgressionProgressView.progress = viewModel?.songProgress ?? 0.0
     }
     
     private func setupViewTapGestureRecognizer() {
