@@ -129,4 +129,10 @@ extension MusicFullScreenViewController: MusicFullScreenViewModelViewControllerD
         updateAlbumCover()
         updateProgressView()
     }
+    
+    func musicFullScreenViewModelDismissView(
+        _ musicFullScreenViewModel: MusicFullScreenViewModelProtocol
+    ) {
+        hideViewAndDismiss()
+    }
 }

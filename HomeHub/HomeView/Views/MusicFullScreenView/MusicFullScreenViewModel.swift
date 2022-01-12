@@ -14,6 +14,10 @@ protocol MusicFullScreenViewModelViewControllerDelegate: AnyObject {
     func musicFullScreenViewModelRefreshView(
         _ musicFullScreenViewModel: MusicFullScreenViewModelProtocol
     )
+    
+    func musicFullScreenViewModelDismissView(
+        _ musicFullScreenViewModel: MusicFullScreenViewModelProtocol
+    )
 }
 
 class MusicFullScreenViewModel: MusicFullScreenViewModelProtocol {
@@ -57,8 +61,13 @@ class MusicFullScreenViewModel: MusicFullScreenViewModelProtocol {
 extension MusicFullScreenViewModel: HomeViewModelMusicFullScreenViewDelegate {
     func homeViewModel(
         _ homeViewModel: HomeViewModelProtocol,
-        trackInfoUpdated trackInfo: TrackInfo
+        trackInfoUpdated trackInfo: TrackInfo?
     ) {
+        guard let trackInfo = trackInfo else {
+            viewControllerDelegate?.musicFullScreenViewModelDismissView(self)
+            return
+        }
+
         self.trackInfo = trackInfo
         viewControllerDelegate?.musicFullScreenViewModelRefreshView(self)
     }

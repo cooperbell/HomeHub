@@ -195,6 +195,12 @@ class HomeViewController: UIViewController {
     @objc func musicViewTapped(
         _ gestureRecognizer: UITapGestureRecognizer
     ) {
+        guard
+            viewModel?.canPresentMusicFullScreenView ?? false
+        else {
+            return
+        }
+
         navigateToMusicFullScreenView()
     }
 }

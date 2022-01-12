@@ -14,12 +14,13 @@ protocol HomeViewModelProtocol {
     var lightsHealthMonitorColor: UIColor { get }
     var lockServiceHealthMonitorColor: UIColor { get }
     var musicServiceHealthMonitorColor: UIColor { get }
+    var canPresentMusicFullScreenView: Bool { get }
     var viewControllerDelegate: HomeViewModelViewControllerDelegate? { get set }
     var musicFullScreenViewDelegate: HomeViewModelMusicFullScreenViewDelegate? { get set }
     
     func numberOfItemsInSection(_ section: Int) -> Int
     func getManageLightViewCellViewModel(at indexPath: IndexPath) -> ManageLightViewCellViewModelProtocol?
-    func getMusicFullScreenViewModel() -> MusicFullScreenViewModelProtocol
+    func getMusicFullScreenViewModel() -> MusicFullScreenViewModelProtocol?
     func lockActionButtonTapped()
 }
 
@@ -45,7 +46,7 @@ protocol HomeViewModelViewControllerDelegate: AnyObject {
 protocol HomeViewModelMusicFullScreenViewDelegate: AnyObject {
     func homeViewModel(
         _ homeViewModel: HomeViewModelProtocol,
-        trackInfoUpdated trackInfo: TrackInfo
+        trackInfoUpdated trackInfo: TrackInfo?
     )
 }
 
@@ -122,20 +123,22 @@ class HomeViewModel: HomeViewModelProtocol {
     }
 
     var albumCoverImage: UIImage? {
-        musicService.trackInfo.image ??
-        UIImage(named: "spotifyNonePlaying")
+        guard let trackInfo = musicService.trackInfo else {
+            return UIImage(named: "spotifyNonePlaying")
+        }
+        return trackInfo.image ?? UIImage(named: "spotifyNonePlaying")
     }
 
     var songTitleText: String? {
-        musicService.trackInfo.name
+        musicService.trackInfo?.name
     }
     
     var artistNameText: String? {
-        musicService.trackInfo.artist
+        musicService.trackInfo?.artist
     }
     
     var songProgressionValue: Float? {
-        musicService.trackInfo.progress
+        musicService.trackInfo?.progress
     }
 
     var lightsHealthMonitorColor: UIColor {
@@ -148,6 +151,10 @@ class HomeViewModel: HomeViewModelProtocol {
     
     var musicServiceHealthMonitorColor: UIColor {
         getHealthStatusColorFrom(musicService.healthy)
+    }
+
+    var canPresentMusicFullScreenView: Bool {
+        musicService.trackInfo != nil
     }
 
     weak var viewControllerDelegate: HomeViewModelViewControllerDelegate?
@@ -171,8 +178,12 @@ class HomeViewModel: HomeViewModelProtocol {
         return ManageLightViewCellViewModel(smartLightData: smartLightData, delegate: self)
     }
 
-    func getMusicFullScreenViewModel() -> MusicFullScreenViewModelProtocol {
-        let viewModel = MusicFullScreenViewModel(trackInfo: musicService.trackInfo)
+    func getMusicFullScreenViewModel() -> MusicFullScreenViewModelProtocol? {
+        guard let trackInfo = musicService.trackInfo else {
+            return nil
+        }
+
+        let viewModel = MusicFullScreenViewModel(trackInfo: trackInfo)
         musicFullScreenViewDelegate = viewModel
 
         return viewModel

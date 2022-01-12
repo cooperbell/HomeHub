@@ -5,7 +5,7 @@ import Combine
 import SpotifyWebAPI
 
 protocol MusicServiceProtocol {
-    var trackInfo: TrackInfo { get set }
+    var trackInfo: TrackInfo? { get set }
     var healthy: Bool { get set }
     var delegate: MusicServiceDelegate? { get set }
 }
@@ -54,7 +54,7 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
     
     // MARK: - Public properties
 
-    var trackInfo: TrackInfo = TrackInfo()
+    var trackInfo: TrackInfo?
 
     var healthy: Bool = false {
         didSet {
@@ -96,9 +96,13 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         _ currentlyPlaying: CurrentlyPlayingContext?,
         completion: @escaping () -> Void
     ) {
+        if trackInfo == nil {
+            trackInfo = TrackInfo()
+        }
+
         guard let currentlyPlaying = currentlyPlaying else {
             healthy = true
-            trackInfo = TrackInfo(name: nil, artist: nil, image: nil, progress: nil)
+            trackInfo = nil
             currentAlbumImageURL = nil
             delegate?.musicServiceTrackInfoUpdated(self)
             completion()
@@ -112,7 +116,7 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             let uri = item?.uri
         else {
             healthy = false
-            trackInfo = TrackInfo(name: nil, artist: nil, image: nil, progress: nil)
+            trackInfo = nil
             currentAlbumImageURL = nil
             delegate?.musicServiceTrackInfoUpdated(self)
             completion()
@@ -146,16 +150,16 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         progressMS: Int?,
         durationMS: Int?
     ) {
-        trackInfo.name = name
-        trackInfo.albumName = track.album?.name
+        trackInfo?.name = name
+        trackInfo?.albumName = track.album?.name
 
         if let artists = track.artists {
             let artistNames = artists
                 .map { $0.name }
                 .joined(separator: ", ")
-            trackInfo.artist = artistNames
+            trackInfo?.artist = artistNames
         } else {
-            trackInfo.artist = nil
+            trackInfo?.artist = nil
         }
 
         if let albumImageUrl = track.album?.images?.largest?.url,
@@ -168,9 +172,9 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             let durationMS = durationMS,
             durationMS > 0 {
             let progress = Float(progressMS) / Float(durationMS)
-            trackInfo.progress = progress
+            trackInfo?.progress = progress
         } else {
-            trackInfo.progress = nil
+            trackInfo?.progress = nil
         }
 
         delegate?.musicServiceTrackInfoUpdated(self)
@@ -182,12 +186,12 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             guard
                 let data = response.data
             else {
-                self.trackInfo.image = nil
+                self.trackInfo?.image = nil
                 return
             }
             
             let image = UIImage(data: data)
-            self.trackInfo.image = image
+            self.trackInfo?.image = image
             self.delegate?.musicServiceTrackInfoUpdated(self)
         }
     }
