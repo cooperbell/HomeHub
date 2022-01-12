@@ -1,6 +1,7 @@
 import UIKit
 
 class MusicFullScreenViewController: UIViewController {
+    // MARK: - Outlets
 
     @IBOutlet weak var musicBackgroundView: UIView!
     @IBOutlet weak var albumCoverImageView: UIImageView!
@@ -9,15 +10,23 @@ class MusicFullScreenViewController: UIViewController {
     @IBOutlet weak var albumNameLabel: UILabel!
     @IBOutlet weak var songProgressionProgressView: UIProgressView!
 
+    // MARK: - Public properties
+
     override var prefersStatusBarHidden: Bool {
         return true
     }
+
+    var viewModel: MusicFullScreenViewModelProtocol?
+
+    // MARK: - Lifecycle methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
     
+    // MARK: - Setup methods
+
     private func setup() {
         view.backgroundColor = .backgroundPrimaryDark
         setupMusicBackgroundView()
@@ -47,13 +56,13 @@ class MusicFullScreenViewController: UIViewController {
     }
     
     private func setTextOnLabels() {
-        songTitleLabel.text = "Send the Fisherman"
-        artistLabel.text = "Caamp"
+        songTitleLabel.text = viewModel?.songTitleText // "Send the Fisherman"
+        artistLabel.text = viewModel?.artistNameText // "Caamp"
         albumNameLabel.text = "Boys (Side B)"
     }
     
     private func updateProgressView() {
-        songProgressionProgressView.progress = 0.5
+        songProgressionProgressView.progress = viewModel?.songProgressionValue ?? 0.0 // 0.5
     }
     
     private func setupViewTapGestureRecognizer() {
