@@ -1,13 +1,14 @@
 import UIKit
+import MarqueeLabel
 
 class MusicFullScreenViewController: UIViewController {
     // MARK: - Outlets
 
     @IBOutlet weak var musicBackgroundView: UIView!
     @IBOutlet weak var albumCoverImageView: UIImageView!
-    @IBOutlet weak var songTitleLabel: UILabel!
-    @IBOutlet weak var artistLabel: UILabel!
-    @IBOutlet weak var albumNameLabel: UILabel!
+    @IBOutlet weak var songTitleLabel: MarqueeLabel!
+    @IBOutlet weak var artistLabel: MarqueeLabel!
+    @IBOutlet weak var albumNameLabel: MarqueeLabel!
     @IBOutlet weak var songProgressionProgressView: UIProgressView!
 
     // MARK: - Public properties
@@ -47,8 +48,13 @@ class MusicFullScreenViewController: UIViewController {
     
     private func setupLabels() {
         songTitleLabel.textColor = .offWhite
+        songTitleLabel.type = .leftRight
+
         artistLabel.textColor = .grayBlue
+        artistLabel.type = .leftRight
+
         albumNameLabel.textColor = .grayBlue
+        albumNameLabel.type = .leftRight
     }
     
     private func setupProgressView() {
