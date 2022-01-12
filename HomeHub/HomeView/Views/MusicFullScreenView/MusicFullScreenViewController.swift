@@ -11,6 +11,10 @@ class MusicFullScreenViewController: UIViewController {
     @IBOutlet weak var albumNameLabel: MarqueeLabel!
     @IBOutlet weak var songProgressionProgressView: UIProgressView!
 
+    // MARK: - Private properties
+
+    private let animationDuration = 0.5
+
     // MARK: - Public properties
 
     override var prefersStatusBarHidden: Bool {
@@ -25,10 +29,16 @@ class MusicFullScreenViewController: UIViewController {
         super.viewDidLoad()
         setup()
     }
-    
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showView()
+    }
+
     // MARK: - Setup methods
 
     private func setup() {
+        view.alpha = 0
         viewModel?.viewControllerDelegate = self
         view.backgroundColor = .backgroundPrimaryDark
         setupMusicBackgroundView()
@@ -84,12 +94,28 @@ class MusicFullScreenViewController: UIViewController {
         view.addGestureRecognizer(tapRecognizer)
     }
     
+    // MARK: - Private methods
+    
+    private func showView() {
+        UIView.animate(
+            withDuration: animationDuration,
+            animations: { self.view.alpha = 1 },
+            completion: nil)
+    }
+    
+    private func hideViewAndDismiss() {
+        UIView.animate(
+            withDuration: animationDuration,
+            animations: { self.view.alpha = 0 },
+            completion: { _ in self.dismiss(animated: false, completion: nil) })
+    }
+
     // MARK: - Callbacks
 
     @objc func viewTapped(
         _ gestureRecognizer: UITapGestureRecognizer
     ) {
-        dismiss(animated: true, completion: nil)
+        hideViewAndDismiss()
     }
 }
 

@@ -182,8 +182,8 @@ class HomeViewController: UIViewController {
         }
 
         vc.viewModel = viewModel?.getMusicFullScreenViewModel()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        vc.modalPresentationStyle = .overCurrentContext
+        present(vc, animated: false, completion: nil)
     }
 
     // MARK: - Callbacks
