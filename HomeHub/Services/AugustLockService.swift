@@ -135,6 +135,7 @@ class AugustLockService: AugustLockServiceProtocol, LoggerProtocol {
                 self.lockState = lockState
             } else {
                 self.healthy = false
+                self.lockState = nil
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: { [weak self] in
