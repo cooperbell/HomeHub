@@ -33,6 +33,7 @@ class MusicFullScreenViewController: UIViewController {
         setupLabels()
         setupProgressView()
         setTextOnLabels()
+        updateAlbumCover()
         updateProgressView()
         setupViewTapGestureRecognizer()
     }
@@ -61,6 +62,10 @@ class MusicFullScreenViewController: UIViewController {
         albumNameLabel.text = "Boys (Side B)"
     }
     
+    private func updateAlbumCover() {
+        albumCoverImageView.image = viewModel?.albumCoverImage
+    }
+
     private func updateProgressView() {
         songProgressionProgressView.progress = viewModel?.songProgressionValue ?? 0.0 // 0.5
     }
