@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad7_9" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Raleway-Medium.ttf">
+            <string>Raleway-Medium</string>
+        </array>
+        <array key="Raleway-SemiBold.ttf">
+            <string>Raleway-SemiBold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Music Full Screen View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="MusicFullScreenView" id="Y6W-OH-hqX" customClass="MusicFullScreenViewController" customModule="HomeHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Wr-CE-hXl">
+                                <rect key="frame" x="30" y="30" width="1073" height="684"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotify" translatesAutoresizingMaskIntoConstraints="NO" id="eIR-q5-Wgj">
+                                        <rect key="frame" x="40" y="40" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="eIR-q5-Wgj" secondAttribute="height" multiplier="1:1" id="nCs-Gf-m2n"/>
+                                            <constraint firstAttribute="width" constant="60" id="yPf-A4-QVd"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="caampAlbumCover" translatesAutoresizingMaskIntoConstraints="NO" id="iuD-mW-k5Q">
+                                        <rect key="frame" x="608" y="40" width="425" height="425"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="425" id="e9G-Ih-XGN"/>
+                                            <constraint firstAttribute="width" secondItem="iuD-mW-k5Q" secondAttribute="height" multiplier="1:1" id="jge-wU-axn"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCp-y1-9Vs">
+                                        <rect key="frame" x="0.0" y="465" width="1073" height="219"/>
+                                        <subviews>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qX0-6r-89b">
+                                                <rect key="frame" x="40" y="106.5" width="993" height="6"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="6" id="ala-Jp-IZr"/>
+                                                </constraints>
+                                            </progressView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="qX0-6r-89b" firstAttribute="centerY" secondItem="hCp-y1-9Vs" secondAttribute="centerY" id="3Rh-IQ-PbD"/>
+                                            <constraint firstItem="qX0-6r-89b" firstAttribute="centerX" secondItem="hCp-y1-9Vs" secondAttribute="centerX" id="Rkz-OM-Gaz"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QUf-XH-wvy">
+                                        <rect key="frame" x="0.0" y="40" width="608" height="425"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnm-OC-9u3">
+                                                <rect key="frame" x="25" y="200" width="558" height="25"/>
+                                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="21"/>
+                                                <color key="textColor" red="0.61960784313725492" green="0.65098039215686276" blue="0.73725490196078436" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOV-Vf-cYz">
+                                                <rect key="frame" x="25" y="245" width="558" height="25"/>
+                                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="21"/>
+                                                <color key="textColor" red="0.61960784310000006" green="0.65098039220000004" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOj-Y1-2gY">
+                                                <rect key="frame" x="25" y="150.5" width="558" height="29.5"/>
+                                                <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="FOV-Vf-cYz" firstAttribute="trailing" secondItem="lnm-OC-9u3" secondAttribute="trailing" id="0R2-dG-izd"/>
+                                            <constraint firstItem="lnm-OC-9u3" firstAttribute="centerX" secondItem="QUf-XH-wvy" secondAttribute="centerX" id="63o-V0-UdQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="lnm-OC-9u3" secondAttribute="trailing" constant="25" id="71G-CE-1Tp"/>
+                                            <constraint firstItem="lnm-OC-9u3" firstAttribute="centerY" secondItem="QUf-XH-wvy" secondAttribute="centerY" id="G1D-2z-WgR"/>
+                                            <constraint firstItem="FOV-Vf-cYz" firstAttribute="top" secondItem="lnm-OC-9u3" secondAttribute="bottom" constant="20" id="MA7-Q7-EU2"/>
+                                            <constraint firstItem="lnm-OC-9u3" firstAttribute="top" secondItem="TOj-Y1-2gY" secondAttribute="bottom" constant="20" id="OI1-4H-jlb"/>
+                                            <constraint firstItem="FOV-Vf-cYz" firstAttribute="leading" secondItem="lnm-OC-9u3" secondAttribute="leading" id="PjK-Um-P5t"/>
+                                            <constraint firstItem="lnm-OC-9u3" firstAttribute="leading" secondItem="QUf-XH-wvy" secondAttribute="leading" constant="25" id="ZDh-wU-ceH"/>
+                                            <constraint firstItem="TOj-Y1-2gY" firstAttribute="trailing" secondItem="lnm-OC-9u3" secondAttribute="trailing" id="gYr-JN-W9p"/>
+                                            <constraint firstItem="TOj-Y1-2gY" firstAttribute="leading" secondItem="lnm-OC-9u3" secondAttribute="leading" id="ucC-2F-KDS"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.26666666666666666" green="0.28627450980392155" blue="0.34509803921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="iuD-mW-k5Q" firstAttribute="top" secondItem="1Wr-CE-hXl" secondAttribute="top" constant="40" id="1BD-yn-8aU"/>
+                                    <constraint firstItem="QUf-XH-wvy" firstAttribute="leading" secondItem="1Wr-CE-hXl" secondAttribute="leading" id="1ld-0J-a3y"/>
+                                    <constraint firstAttribute="bottom" secondItem="hCp-y1-9Vs" secondAttribute="bottom" id="231-rG-K46"/>
+                                    <constraint firstItem="hCp-y1-9Vs" firstAttribute="leading" secondItem="1Wr-CE-hXl" secondAttribute="leading" id="3MA-ZA-HmG"/>
+                                    <constraint firstAttribute="trailing" secondItem="iuD-mW-k5Q" secondAttribute="trailing" constant="40" id="3rZ-sB-Na6"/>
+                                    <constraint firstAttribute="trailing" secondItem="hCp-y1-9Vs" secondAttribute="trailing" id="7c2-5h-oNd"/>
+                                    <constraint firstItem="iuD-mW-k5Q" firstAttribute="trailing" secondItem="qX0-6r-89b" secondAttribute="trailing" id="AnM-Gp-ys1"/>
+                                    <constraint firstItem="iuD-mW-k5Q" firstAttribute="leading" secondItem="QUf-XH-wvy" secondAttribute="trailing" id="S0l-4v-g52"/>
+                                    <constraint firstItem="hCp-y1-9Vs" firstAttribute="top" secondItem="iuD-mW-k5Q" secondAttribute="bottom" id="TGq-dY-c2a"/>
+                                    <constraint firstItem="qX0-6r-89b" firstAttribute="leading" secondItem="eIR-q5-Wgj" secondAttribute="leading" id="Tqg-A9-wb6"/>
+                                    <constraint firstItem="iuD-mW-k5Q" firstAttribute="top" secondItem="QUf-XH-wvy" secondAttribute="top" id="cP2-TA-gfZ"/>
+                                    <constraint firstItem="iuD-mW-k5Q" firstAttribute="bottom" secondItem="QUf-XH-wvy" secondAttribute="bottom" id="l22-fR-ApL"/>
+                                    <constraint firstItem="eIR-q5-Wgj" firstAttribute="top" secondItem="1Wr-CE-hXl" secondAttribute="top" constant="40" id="pDf-Uh-1t4"/>
+                                    <constraint firstItem="eIR-q5-Wgj" firstAttribute="leading" secondItem="1Wr-CE-hXl" secondAttribute="leading" constant="40" id="uQa-Zi-IgH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" red="0.1764705882352941" green="0.19215686274509802" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="1Wr-CE-hXl" secondAttribute="bottom" constant="30" id="ZNG-Qu-Kcb"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1Wr-CE-hXl" secondAttribute="trailing" constant="30" id="eyw-hs-dS9"/>
+                            <constraint firstItem="1Wr-CE-hXl" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="30" id="jAG-wT-tOO"/>
+                            <constraint firstItem="1Wr-CE-hXl" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="mQp-Ph-k9v"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="albumCoverImageView" destination="iuD-mW-k5Q" id="pgb-fR-BF1"/>
+                        <outlet property="albumNameLabel" destination="FOV-Vf-cYz" id="vQR-nH-YxM"/>
+                        <outlet property="artistLabel" destination="lnm-OC-9u3" id="Xbu-VW-IWu"/>
+                        <outlet property="musicBackgroundView" destination="1Wr-CE-hXl" id="fo4-tM-kH9"/>
+                        <outlet property="songProgressionProgressView" destination="qX0-6r-89b" id="7f3-R8-BR1"/>
+                        <outlet property="songTitleLabel" destination="TOj-Y1-2gY" id="usM-Nu-wcb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138.48190644307149" y="85.483870967741936"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="caampAlbumCover" width="250" height="250"/>
+        <image name="spotify" width="168" height="168"/>
+    </resources>
+</document>
