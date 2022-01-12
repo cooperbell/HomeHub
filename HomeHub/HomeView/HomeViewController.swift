@@ -115,9 +115,11 @@ class HomeViewController: UIViewController {
         musicAlbumCoverImageView.applyCornerRadius(10)
 
         musicViewSongTitleLabel.textColor = .mavenOffWhite
+        musicViewSongTitleLabel.type = .leftRight
         musicViewSongTitleLabel.animationDelay = 3
         musicViewSongTitleLabel.trailingBuffer = 20
         
+        musicViewArtistLabel.type = .leftRight
         musicViewArtistLabel.animationDelay = 3
         musicViewArtistLabel.trailingBuffer = 20
 
