@@ -7,6 +7,13 @@ protocol MusicFullScreenViewModelProtocol {
     var albumNameText: String? { get }
     var artistNameText: String? { get }
     var songProgress: Float? { get }
+    var viewControllerDelegate: MusicFullScreenViewModelViewControllerDelegate? { get set }
+}
+
+protocol MusicFullScreenViewModelViewControllerDelegate: AnyObject {
+    func musicFullScreenViewModelRefreshView(
+        _ musicFullScreenViewModel: MusicFullScreenViewModelProtocol
+    )
 }
 
 class MusicFullScreenViewModel: MusicFullScreenViewModelProtocol {
@@ -40,5 +47,19 @@ class MusicFullScreenViewModel: MusicFullScreenViewModelProtocol {
     
     var songProgress: Float? {
         trackInfo.progress
+    }
+
+    weak var viewControllerDelegate: MusicFullScreenViewModelViewControllerDelegate?
+}
+
+// MARK: - HomeViewModelMusicFullScreenViewDelegate
+
+extension MusicFullScreenViewModel: HomeViewModelMusicFullScreenViewDelegate {
+    func homeViewModel(
+        _ homeViewModel: HomeViewModelProtocol,
+        trackInfoUpdated trackInfo: TrackInfo
+    ) {
+        self.trackInfo = trackInfo
+        viewControllerDelegate?.musicFullScreenViewModelRefreshView(self)
     }
 }

@@ -15,6 +15,7 @@ protocol HomeViewModelProtocol {
     var lockServiceHealthMonitorColor: UIColor { get }
     var musicServiceHealthMonitorColor: UIColor { get }
     var viewControllerDelegate: HomeViewModelViewControllerDelegate? { get set }
+    var musicFullScreenViewDelegate: HomeViewModelMusicFullScreenViewDelegate? { get set }
     
     func numberOfItemsInSection(_ section: Int) -> Int
     func getManageLightViewCellViewModel(at indexPath: IndexPath) -> ManageLightViewCellViewModelProtocol?
@@ -39,6 +40,13 @@ protocol HomeViewModelViewControllerDelegate: AnyObject {
         toggleLockViewLoading on: Bool
     )
     func homeViewModelUpdateMusicLabels(_ homeViewModel: HomeViewModelProtocol)
+}
+
+protocol HomeViewModelMusicFullScreenViewDelegate: AnyObject {
+    func homeViewModel(
+        _ homeViewModel: HomeViewModelProtocol,
+        trackInfoUpdated trackInfo: TrackInfo
+    )
 }
 
 enum ViewContext {
@@ -144,6 +152,8 @@ class HomeViewModel: HomeViewModelProtocol {
 
     weak var viewControllerDelegate: HomeViewModelViewControllerDelegate?
 
+    weak var musicFullScreenViewDelegate: HomeViewModelMusicFullScreenViewDelegate?
+
     // MARK: - Public Methods
     
     func numberOfItemsInSection(_ section: Int) -> Int {
@@ -162,7 +172,10 @@ class HomeViewModel: HomeViewModelProtocol {
     }
 
     func getMusicFullScreenViewModel() -> MusicFullScreenViewModelProtocol {
-        MusicFullScreenViewModel(trackInfo: musicService.trackInfo)
+        let viewModel = MusicFullScreenViewModel(trackInfo: musicService.trackInfo)
+        musicFullScreenViewDelegate = viewModel
+
+        return viewModel
     }
 
     func lockActionButtonTapped() {
@@ -277,5 +290,8 @@ extension HomeViewModel: MusicServiceDelegate {
         _ musicService: MusicService
     ) {
         viewControllerDelegate?.homeViewModelUpdateMusicLabels(self)
+        musicFullScreenViewDelegate?.homeViewModel(
+            self,
+            trackInfoUpdated: musicService.trackInfo)
     }
 }

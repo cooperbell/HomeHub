@@ -28,6 +28,7 @@ class MusicFullScreenViewController: UIViewController {
     // MARK: - Setup methods
 
     private func setup() {
+        viewModel?.viewControllerDelegate = self
         view.backgroundColor = .backgroundPrimaryDark
         setupMusicBackgroundView()
         setupLabels()
@@ -83,5 +84,17 @@ class MusicFullScreenViewController: UIViewController {
         _ gestureRecognizer: UITapGestureRecognizer
     ) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - MusicFullScreenViewModelViewControllerDelegate
+
+extension MusicFullScreenViewController: MusicFullScreenViewModelViewControllerDelegate {
+    func musicFullScreenViewModelRefreshView(
+        _ musicFullScreenViewModel: MusicFullScreenViewModelProtocol
+    ) {
+        setTextOnLabels()
+        updateAlbumCover()
+        updateProgressView()
     }
 }
