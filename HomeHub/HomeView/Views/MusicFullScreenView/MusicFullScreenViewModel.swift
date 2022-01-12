@@ -54,6 +54,14 @@ class MusicFullScreenViewModel: MusicFullScreenViewModelProtocol {
     }
 
     weak var viewControllerDelegate: MusicFullScreenViewModelViewControllerDelegate?
+    
+    private var dismissTimer: Timer?
+
+    private func startDismissTimer() {
+        dismissTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { timer in
+            self.viewControllerDelegate?.musicFullScreenViewModelDismissView(self)
+        }
+    }
 }
 
 // MARK: - HomeViewModelMusicFullScreenViewDelegate
@@ -64,11 +72,18 @@ extension MusicFullScreenViewModel: HomeViewModelMusicFullScreenViewDelegate {
         trackInfoUpdated trackInfo: TrackInfo?
     ) {
         guard let trackInfo = trackInfo else {
-            viewControllerDelegate?.musicFullScreenViewModelDismissView(self)
+            if dismissTimer == nil {
+                startDismissTimer()
+            }
             return
         }
 
         self.trackInfo = trackInfo
+        if dismissTimer != nil {
+            dismissTimer?.invalidate()
+            dismissTimer = nil
+        }
+        
         viewControllerDelegate?.musicFullScreenViewModelRefreshView(self)
     }
 }
