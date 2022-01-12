@@ -147,6 +147,7 @@ class LightsService: LightsServiceProtocol, LoggerProtocol {
             }
 
             self.propagateUpdatedLightValues()
+            completion()
         }
     }
 
