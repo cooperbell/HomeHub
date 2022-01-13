@@ -58,7 +58,7 @@ class MusicFullScreenViewModel: MusicFullScreenViewModelProtocol {
     private var dismissTimer: Timer?
 
     private func startDismissTimer() {
-        dismissTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { timer in
+        dismissTimer = Timer.scheduledTimer(withTimeInterval: 300, repeats: false) { timer in
             self.viewControllerDelegate?.musicFullScreenViewModelDismissView(self)
         }
     }
