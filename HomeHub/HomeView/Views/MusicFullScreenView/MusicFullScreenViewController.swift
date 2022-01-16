@@ -51,9 +51,19 @@ class MusicFullScreenViewController: UIViewController {
     }
     
     private func setupMusicBackgroundView() {
-        musicBackgroundView.backgroundColor = .backgroundSecondaryDark
+        musicBackgroundView.backgroundColor = .backgroundPrimaryDark
         musicBackgroundView.applyCornerRadius(25)
         albumCoverImageView.applyCornerRadius(10)
+        updateMusicBackgroundViewShadow()
+    }
+    
+    private func updateMusicBackgroundViewShadow() {
+        let color = viewModel?.albumCoverImage?.averageColor ?? .white
+
+        musicBackgroundView.applyShadow(
+            color: color,
+            radius: 50,
+            opacity: 1)
     }
     
     private func setupLabels() {
@@ -137,6 +147,14 @@ extension MusicFullScreenViewController: MusicFullScreenViewModelViewControllerD
         setTextOnLabels()
         updateAlbumCover()
         updateProgressView()
+
+        UIView.animate(
+            withDuration: 2,
+            animations: {
+                self.updateMusicBackgroundViewShadow()
+            },
+            completion: nil)
+        
     }
     
     func musicFullScreenViewModelDismissView(

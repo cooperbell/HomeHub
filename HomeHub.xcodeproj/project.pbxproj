@@ -16,6 +16,8 @@
 		1425972F278E6EC000AA8E25 /* MusicFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1425972E278E6EC000AA8E25 /* MusicFullScreenViewController.swift */; };
 		14259731278E8CE600AA8E25 /* Storyboard+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14259730278E8CE600AA8E25 /* Storyboard+Ext.swift */; };
 		14259733278F292600AA8E25 /* MusicFullScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14259732278F292600AA8E25 /* MusicFullScreenViewModel.swift */; };
+		142597352794966100AA8E25 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142597342794966100AA8E25 /* UIImage+Ext.swift */; };
+		14259737279497F100AA8E25 /* CGSize+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14259736279497F100AA8E25 /* CGSize+Ext.swift */; };
 		14805218277E3CF600BE0FD5 /* LightsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14805217277E3CF600BE0FD5 /* LightsService.swift */; };
 		1480521A278211DB00BE0FD5 /* AugustLockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14805219278211DB00BE0FD5 /* AugustLockService.swift */; };
 		149D19E527850406008517DC /* SpotifyAPIWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149D19E427850406008517DC /* SpotifyAPIWrapper.swift */; };
@@ -92,6 +94,8 @@
 		1425972E278E6EC000AA8E25 /* MusicFullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicFullScreenViewController.swift; sourceTree = "<group>"; };
 		14259730278E8CE600AA8E25 /* Storyboard+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+Ext.swift"; sourceTree = "<group>"; };
 		14259732278F292600AA8E25 /* MusicFullScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicFullScreenViewModel.swift; sourceTree = "<group>"; };
+		142597342794966100AA8E25 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
+		14259736279497F100AA8E25 /* CGSize+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Ext.swift"; sourceTree = "<group>"; };
 		14805217277E3CF600BE0FD5 /* LightsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightsService.swift; sourceTree = "<group>"; };
 		14805219278211DB00BE0FD5 /* AugustLockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugustLockService.swift; sourceTree = "<group>"; };
 		149D19E427850406008517DC /* SpotifyAPIWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAPIWrapper.swift; sourceTree = "<group>"; };
@@ -314,6 +318,8 @@
 				14B8C45B27833FEF00597DF3 /* UIView+Ext.swift */,
 				149D19F327876796008517DC /* Error+Ext.swift */,
 				14259730278E8CE600AA8E25 /* Storyboard+Ext.swift */,
+				142597342794966100AA8E25 /* UIImage+Ext.swift */,
+				14259736279497F100AA8E25 /* CGSize+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -543,7 +549,9 @@
 				14B8C45C27833FEF00597DF3 /* UIView+Ext.swift in Sources */,
 				141CF406277D194F007189B6 /* ManageLightViewCellViewModel.swift in Sources */,
 				14BF88DD277CDF2A00946BAD /* Color+Ext.swift in Sources */,
+				142597352794966100AA8E25 /* UIImage+Ext.swift in Sources */,
 				141CF401277D11FD007189B6 /* ManageLightViewCell.swift in Sources */,
+				14259737279497F100AA8E25 /* CGSize+Ext.swift in Sources */,
 				141CF404277D1457007189B6 /* UICollectionView+Ext.swift in Sources */,
 				14BF88AB277CDE4600946BAD /* AppDelegate.swift in Sources */,
 				149D19E527850406008517DC /* SpotifyAPIWrapper.swift in Sources */,

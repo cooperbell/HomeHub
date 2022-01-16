@@ -34,17 +34,17 @@
                                         </constraints>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="caampAlbumCover" translatesAutoresizingMaskIntoConstraints="NO" id="iuD-mW-k5Q">
-                                        <rect key="frame" x="608" y="40" width="425" height="425"/>
+                                        <rect key="frame" x="583" y="40" width="450" height="450"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="425" id="e9G-Ih-XGN"/>
+                                            <constraint firstAttribute="width" constant="450" id="e9G-Ih-XGN"/>
                                             <constraint firstAttribute="width" secondItem="iuD-mW-k5Q" secondAttribute="height" multiplier="1:1" id="jge-wU-axn"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCp-y1-9Vs">
-                                        <rect key="frame" x="0.0" y="465" width="1073" height="219"/>
+                                        <rect key="frame" x="0.0" y="490" width="1073" height="194"/>
                                         <subviews>
                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qX0-6r-89b">
-                                                <rect key="frame" x="40" y="106.5" width="993" height="6"/>
+                                                <rect key="frame" x="40" y="94" width="993" height="6"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="6" id="ala-Jp-IZr"/>
                                                 </constraints>
@@ -57,22 +57,22 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QUf-XH-wvy">
-                                        <rect key="frame" x="0.0" y="40" width="608" height="425"/>
+                                        <rect key="frame" x="0.0" y="40" width="583" height="450"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnm-OC-9u3" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                                <rect key="frame" x="25" y="199.5" width="558" height="26"/>
+                                                <rect key="frame" x="25" y="212" width="533" height="26"/>
                                                 <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="22"/>
                                                 <color key="textColor" red="0.61960784313725492" green="0.65098039215686276" blue="0.73725490196078436" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOV-Vf-cYz" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                                <rect key="frame" x="25" y="245.5" width="558" height="26"/>
+                                                <rect key="frame" x="25" y="258" width="533" height="26"/>
                                                 <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="22"/>
                                                 <color key="textColor" red="0.61960784310000006" green="0.65098039220000004" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOj-Y1-2gY" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                                <rect key="frame" x="25" y="148.5" width="558" height="31"/>
+                                                <rect key="frame" x="25" y="161" width="533" height="31"/>
                                                 <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="26"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
