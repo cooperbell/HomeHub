@@ -59,12 +59,12 @@ class HomeViewController: UIViewController {
 
     private func setupGreetingLabel() {
         greetingLabel.text = viewModel?.greetingText
-        greetingLabel.textColor = .mavenOffWhite
+        greetingLabel.textColor = .offWhite
     }
 
     private func setupCurrentTimeLabel() {
         currentTimeLabel.text = viewModel?.currentTimeText
-        currentTimeLabel.textColor = .mavenOffWhite
+        currentTimeLabel.textColor = .offWhite
     }
 
     private func setupLightsBackgroundView() {
@@ -102,7 +102,7 @@ class HomeViewController: UIViewController {
         frontDoorLockBackgroundView.applyCornerRadius(21)
         lockServiceHealthStatusView.applyCornerRadius(2.5)
         frontDoorLockBackgroundView.clipsToBounds = true
-        frontDoorLockStateLabel.textColor = .mavenOffWhite
+        frontDoorLockStateLabel.textColor = .offWhite
 
         updateFrontDoorLockViewSubviews()
     }
@@ -114,21 +114,32 @@ class HomeViewController: UIViewController {
 
         musicAlbumCoverImageView.applyCornerRadius(10)
 
-        musicViewSongTitleLabel.textColor = .mavenOffWhite
+        musicViewSongTitleLabel.speed = .rate(50)
+        musicViewSongTitleLabel.textColor = .offWhite
+        musicViewSongTitleLabel.fadeLength = 5
         musicViewSongTitleLabel.type = .leftRight
-        musicViewSongTitleLabel.animationDelay = 3
-        musicViewSongTitleLabel.trailingBuffer = 20
+        musicViewSongTitleLabel.animationDelay = 2.5
         
+        musicViewArtistLabel.speed = .rate(50)
+        musicViewArtistLabel.fadeLength = 5
         musicViewArtistLabel.type = .leftRight
-        musicViewArtistLabel.animationDelay = 3
-        musicViewArtistLabel.trailingBuffer = 20
+        musicViewArtistLabel.animationDelay = 2.5
 
         musicViewProgressView.trackTintColor = .disabledGrayDark
-        musicViewProgressView.progressTintColor = .mavenOffWhite
+        musicViewProgressView.progressTintColor = .offWhite
         musicViewProgressView.applyMaxCornerRadius()
 
+        setupViewTapGestureRecognizer()
+    
         updateMusicView()
         updateMusicServiceHealthStatusView()
+    }
+    
+    private func setupViewTapGestureRecognizer() {
+        let tapRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(musicViewTapped))
+        musicBackgroundView.addGestureRecognizer(tapRecognizer)
     }
 
     private func updateMusicView() {
@@ -163,10 +174,36 @@ class HomeViewController: UIViewController {
         frontDoorLockStateLabel.text = viewModel?.frontDoorLockStatusText
     }
 
+    // MARK: - Navigation functions
+
+    private func navigateToMusicFullScreenView() {
+        guard
+            let vc: MusicFullScreenViewController = UIStoryboard.instantiateTypedVC()
+        else {
+            return
+        }
+
+        vc.viewModel = viewModel?.getMusicFullScreenViewModel()
+        vc.modalPresentationStyle = .overCurrentContext
+        present(vc, animated: false, completion: nil)
+    }
+
     // MARK: - Callbacks
 
     @IBAction func lockActionButtonTapped(_ sender: Any) {
         viewModel?.lockActionButtonTapped()
+    }
+
+    @objc func musicViewTapped(
+        _ gestureRecognizer: UITapGestureRecognizer
+    ) {
+        guard
+            viewModel?.canPresentMusicFullScreenView ?? false
+        else {
+            return
+        }
+
+        navigateToMusicFullScreenView()
     }
 }
 

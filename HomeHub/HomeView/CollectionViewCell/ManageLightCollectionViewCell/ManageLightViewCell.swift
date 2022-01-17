@@ -33,7 +33,7 @@ class ManageLightViewCell: UICollectionViewCell {
     
     private func setupTitleLabel() {
         titleLabel.text = viewModel?.titleText
-        titleLabel.textColor = .mavenOffWhite
+        titleLabel.textColor = .offWhite
     }
 
     private func setupActionButton() {

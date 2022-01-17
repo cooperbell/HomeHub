@@ -17,11 +17,19 @@ extension UIColor {
             alpha: 1)
     }
     
-    static var mavenOffWhite: UIColor {
+    static var offWhite: UIColor {
         UIColor(
             red: 227 / 255,
             green: 227 / 255,
             blue: 227 / 255,
+            alpha: 1)
+    }
+
+    static var blueGray: UIColor {
+        UIColor(
+            red: 158 / 255,
+            green: 166 / 255,
+            blue: 188 / 255,
             alpha: 1)
     }
 
