@@ -59,7 +59,6 @@ class MusicFullScreenViewController: UIViewController {
     
     private func updateMusicBackgroundViewShadow() {
         let color = viewModel?.albumCoverImage?.averageColor ?? .white
-
         musicBackgroundView.applyShadow(
             color: color,
             radius: 50,
@@ -77,9 +76,9 @@ class MusicFullScreenViewController: UIViewController {
         artistLabel.fadeLength = 5
         artistLabel.type = .leftRight
         artistLabel.animationDelay = 2.5
-        artistLabel.textColor = .grayBlue
+        artistLabel.textColor = .blueGray
 
-        albumNameLabel.textColor = .grayBlue
+        albumNameLabel.textColor = .blueGray
         albumNameLabel.speed = .rate(50)
         albumNameLabel.fadeLength = 5
         albumNameLabel.type = .leftRight

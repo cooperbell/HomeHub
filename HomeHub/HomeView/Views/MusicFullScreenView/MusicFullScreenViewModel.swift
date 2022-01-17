@@ -31,6 +31,8 @@ class MusicFullScreenViewModel: MusicFullScreenViewModelProtocol {
     
     private var trackInfo: TrackInfo
 
+    private var dismissTimer: Timer?
+
     // MARK: - Public properties
 
     var albumCoverImage: UIImage? {
@@ -55,12 +57,25 @@ class MusicFullScreenViewModel: MusicFullScreenViewModelProtocol {
 
     weak var viewControllerDelegate: MusicFullScreenViewModelViewControllerDelegate?
     
-    private var dismissTimer: Timer?
+    // MARK: - Private methods
 
-    private func startDismissTimer() {
+    private func startDismissTimerIfNeeded() {
+        guard dismissTimer == nil else {
+            return
+        }
+
         dismissTimer = Timer.scheduledTimer(withTimeInterval: 300, repeats: false) { timer in
             self.viewControllerDelegate?.musicFullScreenViewModelDismissView(self)
         }
+    }
+    
+    private func stopDismissTimerIfNeeded() {
+        guard dismissTimer != nil else {
+            return
+        }
+        
+        dismissTimer?.invalidate()
+        dismissTimer = nil
     }
 }
 
@@ -72,18 +87,12 @@ extension MusicFullScreenViewModel: HomeViewModelMusicFullScreenViewDelegate {
         trackInfoUpdated trackInfo: TrackInfo?
     ) {
         guard let trackInfo = trackInfo else {
-            if dismissTimer == nil {
-                startDismissTimer()
-            }
+            startDismissTimerIfNeeded()
             return
         }
 
         self.trackInfo = trackInfo
-        if dismissTimer != nil {
-            dismissTimer?.invalidate()
-            dismissTimer = nil
-        }
-        
+        stopDismissTimerIfNeeded()
         viewControllerDelegate?.musicFullScreenViewModelRefreshView(self)
     }
 }

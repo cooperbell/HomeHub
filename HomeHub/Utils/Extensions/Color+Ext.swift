@@ -25,7 +25,7 @@ extension UIColor {
             alpha: 1)
     }
 
-    static var grayBlue: UIColor {
+    static var blueGray: UIColor {
         UIColor(
             red: 158 / 255,
             green: 166 / 255,
