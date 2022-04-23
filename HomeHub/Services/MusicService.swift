@@ -25,6 +25,7 @@ struct TrackInfo {
     var albumName: String?
     var artist: String?
     var image: UIImage?
+    var duration: Int?
     var progress: Float?
 }
 
@@ -42,6 +43,7 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             object: nil)
 
         pollCurrentlyPlaying()
+        startSongProgressionInterpolationTimer()
     }
 
     // MARK: - Private properties
@@ -75,6 +77,32 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
                 self.pollCurrentlyPlaying()
             }
         }
+    }
+
+    private func startSongProgressionInterpolationTimer() {
+        let delta = 0.1
+        Timer.scheduledTimer(withTimeInterval: delta, repeats: true) { timer in
+            if let durationMS = self.trackInfo?.duration,
+                let progress = self.trackInfo?.progress {
+                let interpolatedProgress = self.calculateInterpolatedSongProgress(
+                    progress: progress,
+                    durationMS: durationMS,
+                    delta: delta)
+                self.trackInfo?.progress = interpolatedProgress
+                self.delegate?.musicServiceTrackInfoUpdated(self)
+            }
+        }
+    }
+
+    private func calculateInterpolatedSongProgress(
+        progress: Float,
+        durationMS: Int,
+        delta: Double
+    ) -> Float {
+        let durationS = Float(durationMS) / 1000.0
+        let percentDelta = Float(100.0 / durationS)
+        let percentDeltaQuartered = (percentDelta * Float(delta)) / 100.0
+        return progress + percentDeltaQuartered
     }
 
     private func loadCurrentlyPlaying(
@@ -172,8 +200,10 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             let durationMS = durationMS,
             durationMS > 0 {
             let progress = Float(progressMS) / Float(durationMS)
+            trackInfo?.duration = durationMS
             trackInfo?.progress = progress
         } else {
+            trackInfo?.duration = nil
             trackInfo?.progress = nil
         }
 
