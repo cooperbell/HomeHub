@@ -27,6 +27,7 @@ struct TrackInfo {
     var image: UIImage?
     var duration: Int?
     var progress: Float?
+    var isPlaying: Bool?
 }
 
 class MusicService: MusicServiceProtocol, LoggerProtocol {
@@ -82,27 +83,8 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
     private func startSongProgressionInterpolationTimer() {
         let delta = 0.1
         Timer.scheduledTimer(withTimeInterval: delta, repeats: true) { timer in
-            if let durationMS = self.trackInfo?.duration,
-                let progress = self.trackInfo?.progress {
-                let interpolatedProgress = self.calculateInterpolatedSongProgress(
-                    progress: progress,
-                    durationMS: durationMS,
-                    delta: delta)
-                self.trackInfo?.progress = interpolatedProgress
-                self.delegate?.musicServiceTrackInfoUpdated(self)
-            }
+            self.updateTrackProgress(delta: delta)
         }
-    }
-
-    private func calculateInterpolatedSongProgress(
-        progress: Float,
-        durationMS: Int,
-        delta: Double
-    ) -> Float {
-        let durationS = Float(durationMS) / 1000.0
-        let percentDelta = Float(100.0 / durationS)
-        let percentDeltaQuartered = (percentDelta * Float(delta)) / 100.0
-        return progress + percentDeltaQuartered
     }
 
     private func loadCurrentlyPlaying(
@@ -120,15 +102,32 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             .store(in: &cancellables)
     }
     
+    private func updateTrackProgress(delta: Double) {
+        guard
+            trackInfo?.isPlaying ?? false,
+            let durationMS = trackInfo?.duration,
+            let progress = trackInfo?.progress
+        else {
+            return
+        }
+
+        let interpolatedProgress = self.calculateInterpolatedSongProgress(
+            progress: progress,
+            durationMS: durationMS,
+            delta: delta)
+        self.trackInfo?.progress = interpolatedProgress
+        self.delegate?.musicServiceTrackInfoUpdated(self)
+    }
+    
     private func handleCurrentlyPlayingContext(
-        _ currentlyPlaying: CurrentlyPlayingContext?,
+        _ currentlyPlayingContext: CurrentlyPlayingContext?,
         completion: @escaping () -> Void
     ) {
         if trackInfo == nil {
             trackInfo = TrackInfo()
         }
 
-        guard let currentlyPlaying = currentlyPlaying else {
+        guard let currentlyPlayingContext = currentlyPlayingContext else {
             healthy = true
             trackInfo = nil
             currentAlbumImageURL = nil
@@ -137,7 +136,7 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             return
         }
 
-        let item = currentlyPlaying.item
+        let item = currentlyPlayingContext.item
 
         guard
             let trackName = item?.name,
@@ -157,14 +156,16 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
                 receiveCompletion: self.receiveCompletion(_:),
                 receiveValue: { track in
                     self.healthy = true
-                    let progressMS = currentlyPlaying.progressMS
+                    let progressMS = currentlyPlayingContext.progressMS
                     let durationMS = item?.durationMS
+                    let isPlaying = currentlyPlayingContext.isPlaying
 
                     self.updateTrackInfo(
                         track,
                         name: trackName,
                         progressMS: progressMS,
-                        durationMS: durationMS)
+                        durationMS: durationMS,
+                        isPlaying: isPlaying)
 
                     completion()
                 }
@@ -176,10 +177,12 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         _ track: Track,
         name: String,
         progressMS: Int?,
-        durationMS: Int?
+        durationMS: Int?,
+        isPlaying: Bool?
     ) {
         trackInfo?.name = name
         trackInfo?.albumName = track.album?.name
+        trackInfo?.isPlaying = isPlaying
 
         if let artists = track.artists {
             let artistNames = artists
@@ -237,6 +240,17 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         logError(error)
     }
 
+    private func calculateInterpolatedSongProgress(
+        progress: Float,
+        durationMS: Int,
+        delta: Double
+    ) -> Float {
+        let durationS = Float(durationMS) / 1000.0
+        let percentDelta = Float(100.0 / durationS)
+        let percentDeltaQuartered = (percentDelta * Float(delta)) / 100.0
+        return progress + percentDeltaQuartered
+    }
+    
     private func wait(
         completion: @escaping (() -> Void)
     ) {
