@@ -91,10 +91,12 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         completion: (() -> Void)? = nil
     ) {
         spotify.api
-            .currentPlayback(market: nil)
+            .currentPlayback()
             .receive(on: RunLoop.main)
             .sink(
-                receiveCompletion: self.receiveCompletion(_:),
+                receiveCompletion: {
+                    self.receiveCompletion($0) { completion?() }
+                },
                 receiveValue: {
                     self.handleCurrentlyPlayingContext($0) { completion?() }
                 }
@@ -150,10 +152,12 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             return
         }
 
-        spotify.api.track(uri, market: nil)
+        spotify.api.track(uri)
             .receive(on: RunLoop.main)
             .sink(
-                receiveCompletion: self.receiveCompletion(_:),
+                receiveCompletion: {
+                    self.receiveCompletion($0) { completion() }
+                },
                 receiveValue: { track in
                     self.healthy = true
                     let progressMS = currentlyPlayingContext.progressMS
@@ -230,14 +234,16 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
     }
     
     private func receiveCompletion(
-        _ completion: Subscribers.Completion<Error>
+        _ receivedCompletion: Subscribers.Completion<Error>,
+        completion: @escaping () -> Void
     ) {
-        guard case let .failure(error) = completion else {
+        guard case let .failure(error) = receivedCompletion else {
             return
         }
 
         healthy = false
         logError(error)
+        completion()
     }
 
     private func calculateInterpolatedSongProgress(
