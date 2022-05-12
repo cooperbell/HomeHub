@@ -52,7 +52,7 @@ class AugustLockService: AugustLockServiceProtocol, LoggerProtocol {
 
     init(delegate: AugustLockServiceDelegate? = nil) {
         self.delegate = delegate
-        pollLockState()
+//        pollLockState()
     }
 
     // MARK: - Private properties
