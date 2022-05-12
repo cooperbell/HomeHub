@@ -175,7 +175,6 @@ class AugustLockService: AugustLockServiceProtocol, LoggerProtocol {
             headers: headers).responseJSON { response in
             switch response.result {
             case let .success(value):
-                self.healthy = true
                 let json = value as? [String: Any]
                 completion(json)
             case let .failure(error):
