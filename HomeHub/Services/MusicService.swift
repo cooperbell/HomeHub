@@ -272,20 +272,23 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             return
         }
         
-        spotify.api.authorizationManager.requestAccessAndRefreshTokens(
-            redirectURIWithQuery: url,
-            state: spotify.authorizationState
-        )
-        .receive(on: RunLoop.main)
-        .sink(receiveCompletion: { completion in
-            if case .failure(let error) = completion {
-                self.logError(error)
-            } else {
-                self.pollCurrentlyPlaying()
-            }
-        })
-        .store(in: &cancellables)
+        spotify
+            .api
+            .authorizationManager
+            .requestAccessAndRefreshTokens(
+                redirectURIWithQuery: url,
+                state: spotify.authorizationState
+            )
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { completion in
+                if case .failure(let error) = completion {
+                    self.logError(error)
+                } else {
+                    self.pollCurrentlyPlaying()
+                }
+            })
+            .store(in: &cancellables)
         
-        self.spotify.authorizationState = String.randomURLSafe(length: 128)
+        spotify.authorizationState = String.randomURLSafe(length: 128)
     }
 }
