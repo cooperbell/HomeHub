@@ -254,7 +254,9 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         let durationS = Float(durationMS) / 1000.0
         let percentDelta = Float(100.0 / durationS)
         let percentDeltaQuartered = (percentDelta * Float(delta)) / 100.0
-        return progress + percentDeltaQuartered
+        let interpolatedProgress = progress + percentDeltaQuartered
+
+        return interpolatedProgress > 1.0 ? 1.0 : interpolatedProgress
     }
     
     private func wait(
