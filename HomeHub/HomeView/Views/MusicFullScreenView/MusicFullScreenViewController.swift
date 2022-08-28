@@ -5,10 +5,11 @@ class MusicFullScreenViewController: UIViewController {
     // MARK: - Outlets
 
     @IBOutlet weak var musicBackgroundView: UIView!
+    @IBOutlet weak var fauxBlurView: UIView!
+    @IBOutlet weak var artistImageView: UIImageView!
     @IBOutlet weak var albumCoverImageView: UIImageView!
     @IBOutlet weak var songTitleLabel: MarqueeLabel!
     @IBOutlet weak var artistLabel: MarqueeLabel!
-    @IBOutlet weak var albumNameLabel: MarqueeLabel!
     @IBOutlet weak var songProgressionProgressView: UIProgressView!
 
     // MARK: - Private properties
@@ -42,27 +43,24 @@ class MusicFullScreenViewController: UIViewController {
         viewModel?.viewControllerDelegate = self
         view.backgroundColor = .backgroundPrimaryDark
         setupMusicBackgroundView()
+        setupBlurView()
         setupLabels()
         setupProgressView()
         setTextOnLabels()
         updateAlbumCover()
+        updateArtistImage()
         updateProgressView()
         setupViewTapGestureRecognizer()
     }
     
     private func setupMusicBackgroundView() {
-        musicBackgroundView.backgroundColor = .backgroundPrimaryDark
-        musicBackgroundView.applyCornerRadius(25)
+        musicBackgroundView.backgroundColor = .clear
         albumCoverImageView.applyCornerRadius(10)
-        updateMusicBackgroundViewShadow()
     }
     
-    private func updateMusicBackgroundViewShadow() {
-        let color = viewModel?.albumCoverImage?.averageColor ?? .white
-        musicBackgroundView.applyShadow(
-            color: color,
-            radius: 50,
-            opacity: 1)
+    private func setupBlurView() {
+        fauxBlurView.backgroundColor = .backgroundPrimaryDark
+        fauxBlurView.alpha = 0.7
     }
     
     private func setupLabels() {
@@ -76,17 +74,11 @@ class MusicFullScreenViewController: UIViewController {
         artistLabel.fadeLength = 5
         artistLabel.type = .leftRight
         artistLabel.animationDelay = 2.5
-        artistLabel.textColor = .blueGray
-
-        albumNameLabel.textColor = .blueGray
-        albumNameLabel.speed = .rate(50)
-        albumNameLabel.fadeLength = 5
-        albumNameLabel.type = .leftRight
-        albumNameLabel.animationDelay = 2.5
+        artistLabel.textColor = .offWhite
     }
     
     private func setupProgressView() {
-        songProgressionProgressView.trackTintColor = .disabledGrayDark
+        songProgressionProgressView.trackTintColor = UIColor.offWhite.withAlphaComponent(0.25)
         songProgressionProgressView.progressTintColor = .offWhite
         songProgressionProgressView.applyMaxCornerRadius()
     }
@@ -94,11 +86,26 @@ class MusicFullScreenViewController: UIViewController {
     private func setTextOnLabels() {
         songTitleLabel.text = viewModel?.songTitleText
         artistLabel.text = viewModel?.artistNameText
-        albumNameLabel.text = viewModel?.albumNameText
     }
     
     private func updateAlbumCover() {
         albumCoverImageView.image = viewModel?.albumCoverImage
+    }
+    
+    private func updateArtistImage() {
+        guard artistImageView.image != viewModel?.artistImage else {
+            return
+        }
+
+        UIView.animate(withDuration: 0.5) {
+            self.artistImageView.alpha = 0.0
+        }
+
+        artistImageView.image = viewModel?.artistImage
+        
+        UIView.animate(withDuration: 1) {
+            self.artistImageView.alpha = 1.0
+        }
     }
 
     private func updateProgressView() {
@@ -145,13 +152,12 @@ extension MusicFullScreenViewController: MusicFullScreenViewModelViewControllerD
     ) {
         setTextOnLabels()
         updateAlbumCover()
+        updateArtistImage()
         updateProgressView()
 
         UIView.animate(
             withDuration: 2,
-            animations: {
-                self.updateMusicBackgroundViewShadow()
-            },
+            animations: {},
             completion: nil)
         
     }

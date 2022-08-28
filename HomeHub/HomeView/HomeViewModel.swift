@@ -126,7 +126,7 @@ class HomeViewModel: HomeViewModelProtocol {
         guard let trackInfo = musicService.trackInfo else {
             return UIImage(named: "spotifyNonePlaying")
         }
-        return trackInfo.image ?? UIImage(named: "spotifyNonePlaying")
+        return trackInfo.albumImage ?? UIImage(named: "spotifyNonePlaying")
     }
 
     var songTitleText: String? {

@@ -6,6 +6,7 @@ protocol MusicFullScreenViewModelProtocol {
     var songTitleText: String? { get }
     var albumNameText: String? { get }
     var artistNameText: String? { get }
+    var artistImage: UIImage? { get }
     var songProgress: Float? { get }
     var viewControllerDelegate: MusicFullScreenViewModelViewControllerDelegate? { get set }
 }
@@ -36,7 +37,7 @@ class MusicFullScreenViewModel: MusicFullScreenViewModelProtocol {
     // MARK: - Public properties
 
     var albumCoverImage: UIImage? {
-        trackInfo.image
+        trackInfo.albumImage
     }
 
     var songTitleText: String? {
@@ -50,7 +51,11 @@ class MusicFullScreenViewModel: MusicFullScreenViewModelProtocol {
     var artistNameText: String? {
         trackInfo.artist
     }
-    
+
+    var artistImage: UIImage? {
+        trackInfo.artistImage
+    }
+
     var songProgress: Float? {
         trackInfo.progress
     }

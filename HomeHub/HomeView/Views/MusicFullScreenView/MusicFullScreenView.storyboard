@@ -24,107 +24,99 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Wr-CE-hXl">
-                                <rect key="frame" x="30" y="30" width="1073" height="684"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotify" translatesAutoresizingMaskIntoConstraints="NO" id="eIR-q5-Wgj">
-                                        <rect key="frame" x="40" y="40" width="60" height="60"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="harry_styles_promo" translatesAutoresizingMaskIntoConstraints="NO" id="oO7-9e-IEf">
+                                        <rect key="frame" x="0.0" y="-383.5" width="1133" height="1511"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="oO7-9e-IEf" secondAttribute="height" multiplier="3:4" id="XxZ-lx-85t"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UvI-Ln-u03">
+                                        <rect key="frame" x="0.0" y="0.0" width="1133" height="744"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotifyGray" translatesAutoresizingMaskIntoConstraints="NO" id="eIR-q5-Wgj">
+                                        <rect key="frame" x="60" y="40" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="eIR-q5-Wgj" secondAttribute="height" multiplier="1:1" id="nCs-Gf-m2n"/>
                                             <constraint firstAttribute="width" constant="60" id="yPf-A4-QVd"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="caampAlbumCover" translatesAutoresizingMaskIntoConstraints="NO" id="iuD-mW-k5Q">
-                                        <rect key="frame" x="583" y="40" width="450" height="450"/>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qX0-6r-89b">
+                                        <rect key="frame" x="60" y="648" width="1013" height="6"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="450" id="e9G-Ih-XGN"/>
+                                            <constraint firstAttribute="height" constant="6" id="ala-Jp-IZr"/>
+                                        </constraints>
+                                    </progressView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="caampAlbumCover" translatesAutoresizingMaskIntoConstraints="NO" id="iuD-mW-k5Q">
+                                        <rect key="frame" x="60" y="383" width="225" height="225"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="225" id="e9G-Ih-XGN"/>
                                             <constraint firstAttribute="width" secondItem="iuD-mW-k5Q" secondAttribute="height" multiplier="1:1" id="jge-wU-axn"/>
                                         </constraints>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCp-y1-9Vs">
-                                        <rect key="frame" x="0.0" y="490" width="1073" height="194"/>
-                                        <subviews>
-                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qX0-6r-89b">
-                                                <rect key="frame" x="40" y="94" width="993" height="6"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="6" id="ala-Jp-IZr"/>
-                                                </constraints>
-                                            </progressView>
-                                        </subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUp-Y0-vqm">
+                                        <rect key="frame" x="285" y="450.5" width="848" height="90"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="qX0-6r-89b" firstAttribute="centerY" secondItem="hCp-y1-9Vs" secondAttribute="centerY" id="3Rh-IQ-PbD"/>
-                                            <constraint firstItem="qX0-6r-89b" firstAttribute="centerX" secondItem="hCp-y1-9Vs" secondAttribute="centerX" id="Rkz-OM-Gaz"/>
-                                        </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QUf-XH-wvy">
-                                        <rect key="frame" x="0.0" y="40" width="583" height="450"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnm-OC-9u3" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                                <rect key="frame" x="25" y="212" width="533" height="26"/>
-                                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="22"/>
-                                                <color key="textColor" red="0.61960784313725492" green="0.65098039215686276" blue="0.73725490196078436" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOV-Vf-cYz" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                                <rect key="frame" x="25" y="258" width="533" height="26"/>
-                                                <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="22"/>
-                                                <color key="textColor" red="0.61960784310000006" green="0.65098039220000004" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOj-Y1-2gY" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                                                <rect key="frame" x="25" y="161" width="533" height="31"/>
-                                                <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="26"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="FOV-Vf-cYz" firstAttribute="trailing" secondItem="lnm-OC-9u3" secondAttribute="trailing" id="0R2-dG-izd"/>
-                                            <constraint firstItem="lnm-OC-9u3" firstAttribute="centerX" secondItem="QUf-XH-wvy" secondAttribute="centerX" id="63o-V0-UdQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="lnm-OC-9u3" secondAttribute="trailing" constant="25" id="71G-CE-1Tp"/>
-                                            <constraint firstItem="lnm-OC-9u3" firstAttribute="centerY" secondItem="QUf-XH-wvy" secondAttribute="centerY" id="G1D-2z-WgR"/>
-                                            <constraint firstItem="FOV-Vf-cYz" firstAttribute="top" secondItem="lnm-OC-9u3" secondAttribute="bottom" constant="20" id="MA7-Q7-EU2"/>
-                                            <constraint firstItem="lnm-OC-9u3" firstAttribute="top" secondItem="TOj-Y1-2gY" secondAttribute="bottom" constant="20" id="OI1-4H-jlb"/>
-                                            <constraint firstItem="FOV-Vf-cYz" firstAttribute="leading" secondItem="lnm-OC-9u3" secondAttribute="leading" id="PjK-Um-P5t"/>
-                                            <constraint firstItem="lnm-OC-9u3" firstAttribute="leading" secondItem="QUf-XH-wvy" secondAttribute="leading" constant="25" id="ZDh-wU-ceH"/>
-                                            <constraint firstItem="TOj-Y1-2gY" firstAttribute="trailing" secondItem="lnm-OC-9u3" secondAttribute="trailing" id="gYr-JN-W9p"/>
-                                            <constraint firstItem="TOj-Y1-2gY" firstAttribute="leading" secondItem="lnm-OC-9u3" secondAttribute="leading" id="ucC-2F-KDS"/>
-                                        </constraints>
-                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOj-Y1-2gY" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                                        <rect key="frame" x="320" y="450.5" width="773" height="47"/>
+                                        <fontDescription key="fontDescription" name="Raleway-SemiBold" family="Raleway" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="0.0"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnm-OC-9u3" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                                        <rect key="frame" x="320" y="514.5" width="773" height="26"/>
+                                        <fontDescription key="fontDescription" name="Raleway-Medium" family="Raleway" pointSize="22"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.26666666666666666" green="0.28627450980392155" blue="0.34509803921568627" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="iuD-mW-k5Q" firstAttribute="top" secondItem="1Wr-CE-hXl" secondAttribute="top" constant="40" id="1BD-yn-8aU"/>
-                                    <constraint firstItem="QUf-XH-wvy" firstAttribute="leading" secondItem="1Wr-CE-hXl" secondAttribute="leading" id="1ld-0J-a3y"/>
-                                    <constraint firstAttribute="bottom" secondItem="hCp-y1-9Vs" secondAttribute="bottom" id="231-rG-K46"/>
-                                    <constraint firstItem="hCp-y1-9Vs" firstAttribute="leading" secondItem="1Wr-CE-hXl" secondAttribute="leading" id="3MA-ZA-HmG"/>
-                                    <constraint firstAttribute="trailing" secondItem="iuD-mW-k5Q" secondAttribute="trailing" constant="40" id="3rZ-sB-Na6"/>
-                                    <constraint firstAttribute="trailing" secondItem="hCp-y1-9Vs" secondAttribute="trailing" id="7c2-5h-oNd"/>
-                                    <constraint firstItem="iuD-mW-k5Q" firstAttribute="trailing" secondItem="qX0-6r-89b" secondAttribute="trailing" id="AnM-Gp-ys1"/>
-                                    <constraint firstItem="iuD-mW-k5Q" firstAttribute="leading" secondItem="QUf-XH-wvy" secondAttribute="trailing" id="S0l-4v-g52"/>
-                                    <constraint firstItem="hCp-y1-9Vs" firstAttribute="top" secondItem="iuD-mW-k5Q" secondAttribute="bottom" id="TGq-dY-c2a"/>
-                                    <constraint firstItem="qX0-6r-89b" firstAttribute="leading" secondItem="eIR-q5-Wgj" secondAttribute="leading" id="Tqg-A9-wb6"/>
-                                    <constraint firstItem="iuD-mW-k5Q" firstAttribute="top" secondItem="QUf-XH-wvy" secondAttribute="top" id="cP2-TA-gfZ"/>
-                                    <constraint firstItem="iuD-mW-k5Q" firstAttribute="bottom" secondItem="QUf-XH-wvy" secondAttribute="bottom" id="l22-fR-ApL"/>
+                                    <constraint firstAttribute="trailing" secondItem="TOj-Y1-2gY" secondAttribute="trailing" constant="40" id="3ux-S2-6bF"/>
+                                    <constraint firstItem="lnm-OC-9u3" firstAttribute="bottom" secondItem="aUp-Y0-vqm" secondAttribute="bottom" id="53f-ak-18Y"/>
+                                    <constraint firstItem="lnm-OC-9u3" firstAttribute="top" secondItem="TOj-Y1-2gY" secondAttribute="bottom" constant="17" id="ETm-Hy-DTH"/>
+                                    <constraint firstItem="qX0-6r-89b" firstAttribute="top" secondItem="iuD-mW-k5Q" secondAttribute="bottom" constant="40" id="F7e-oj-Xzb"/>
+                                    <constraint firstAttribute="trailing" secondItem="qX0-6r-89b" secondAttribute="trailing" constant="60" id="K2w-HG-ydu"/>
+                                    <constraint firstItem="aUp-Y0-vqm" firstAttribute="leading" secondItem="iuD-mW-k5Q" secondAttribute="trailing" id="M0Q-DL-ak6"/>
+                                    <constraint firstItem="qX0-6r-89b" firstAttribute="leading" secondItem="1Wr-CE-hXl" secondAttribute="leading" constant="60" id="N6j-D2-4Mf"/>
+                                    <constraint firstItem="TOj-Y1-2gY" firstAttribute="leading" secondItem="iuD-mW-k5Q" secondAttribute="trailing" constant="35" id="RfM-zu-IQa"/>
+                                    <constraint firstAttribute="bottom" secondItem="UvI-Ln-u03" secondAttribute="bottom" id="VhK-bI-UJT"/>
+                                    <constraint firstItem="lnm-OC-9u3" firstAttribute="leading" secondItem="TOj-Y1-2gY" secondAttribute="leading" id="Xsl-5c-jwb"/>
+                                    <constraint firstAttribute="trailing" secondItem="oO7-9e-IEf" secondAttribute="trailing" id="a3S-Qk-gnp"/>
+                                    <constraint firstItem="oO7-9e-IEf" firstAttribute="centerY" secondItem="1Wr-CE-hXl" secondAttribute="centerY" id="bQx-IL-DWg"/>
+                                    <constraint firstItem="TOj-Y1-2gY" firstAttribute="top" secondItem="aUp-Y0-vqm" secondAttribute="top" id="bph-dd-DKg"/>
+                                    <constraint firstItem="iuD-mW-k5Q" firstAttribute="leading" secondItem="eIR-q5-Wgj" secondAttribute="leading" id="csM-6X-QqC"/>
+                                    <constraint firstAttribute="trailing" secondItem="aUp-Y0-vqm" secondAttribute="trailing" id="dDv-Yf-AJ1"/>
+                                    <constraint firstItem="aUp-Y0-vqm" firstAttribute="centerY" secondItem="iuD-mW-k5Q" secondAttribute="centerY" id="dwt-NN-ShS"/>
+                                    <constraint firstItem="lnm-OC-9u3" firstAttribute="trailing" secondItem="TOj-Y1-2gY" secondAttribute="trailing" id="hwz-gF-b10"/>
+                                    <constraint firstItem="qX0-6r-89b" firstAttribute="leading" secondItem="iuD-mW-k5Q" secondAttribute="leading" id="ipC-32-WHw"/>
                                     <constraint firstItem="eIR-q5-Wgj" firstAttribute="top" secondItem="1Wr-CE-hXl" secondAttribute="top" constant="40" id="pDf-Uh-1t4"/>
-                                    <constraint firstItem="eIR-q5-Wgj" firstAttribute="leading" secondItem="1Wr-CE-hXl" secondAttribute="leading" constant="40" id="uQa-Zi-IgH"/>
+                                    <constraint firstAttribute="bottom" secondItem="qX0-6r-89b" secondAttribute="bottom" constant="90" id="rHc-3a-Efm"/>
+                                    <constraint firstItem="UvI-Ln-u03" firstAttribute="top" secondItem="1Wr-CE-hXl" secondAttribute="top" id="tq0-Mr-kXs"/>
+                                    <constraint firstItem="oO7-9e-IEf" firstAttribute="leading" secondItem="1Wr-CE-hXl" secondAttribute="leading" id="woo-3c-i8J"/>
+                                    <constraint firstAttribute="trailing" secondItem="UvI-Ln-u03" secondAttribute="trailing" id="yNg-NL-pQq"/>
+                                    <constraint firstItem="UvI-Ln-u03" firstAttribute="leading" secondItem="1Wr-CE-hXl" secondAttribute="leading" id="zdN-fy-HKJ"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" red="0.1764705882352941" green="0.19215686274509802" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="1Wr-CE-hXl" secondAttribute="bottom" constant="30" id="ZNG-Qu-Kcb"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1Wr-CE-hXl" secondAttribute="trailing" constant="30" id="eyw-hs-dS9"/>
-                            <constraint firstItem="1Wr-CE-hXl" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="30" id="jAG-wT-tOO"/>
-                            <constraint firstItem="1Wr-CE-hXl" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="mQp-Ph-k9v"/>
+                            <constraint firstAttribute="bottom" secondItem="1Wr-CE-hXl" secondAttribute="bottom" id="ZNG-Qu-Kcb"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1Wr-CE-hXl" secondAttribute="trailing" id="eyw-hs-dS9"/>
+                            <constraint firstItem="1Wr-CE-hXl" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="jAG-wT-tOO"/>
+                            <constraint firstItem="1Wr-CE-hXl" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="mQp-Ph-k9v"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="albumCoverImageView" destination="iuD-mW-k5Q" id="pgb-fR-BF1"/>
-                        <outlet property="albumNameLabel" destination="FOV-Vf-cYz" id="vQR-nH-YxM"/>
+                        <outlet property="artistImageView" destination="oO7-9e-IEf" id="Ecf-Eu-Ula"/>
                         <outlet property="artistLabel" destination="lnm-OC-9u3" id="Xbu-VW-IWu"/>
+                        <outlet property="fauxBlurView" destination="UvI-Ln-u03" id="Sps-Pe-oZh"/>
                         <outlet property="musicBackgroundView" destination="1Wr-CE-hXl" id="fo4-tM-kH9"/>
                         <outlet property="songProgressionProgressView" destination="qX0-6r-89b" id="7f3-R8-BR1"/>
                         <outlet property="songTitleLabel" destination="TOj-Y1-2gY" id="usM-Nu-wcb"/>
@@ -135,8 +127,17 @@
             <point key="canvasLocation" x="138.48190644307149" y="85.483870967741936"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="TOj-Y1-2gY">
+            <size key="intrinsicContentSize" width="191.5" height="47"/>
+        </designable>
+        <designable name="lnm-OC-9u3">
+            <size key="intrinsicContentSize" width="54.5" height="26"/>
+        </designable>
+    </designables>
     <resources>
         <image name="caampAlbumCover" width="250" height="250"/>
-        <image name="spotify" width="168" height="168"/>
+        <image name="harry_styles_promo" width="320" height="320"/>
+        <image name="spotifyGray" width="50" height="50"/>
     </resources>
 </document>
