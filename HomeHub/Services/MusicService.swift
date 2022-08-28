@@ -23,11 +23,17 @@ protocol MusicServiceDelegate: AnyObject {
 struct TrackInfo {
     var name: String?
     var albumName: String?
+    var albumImage: UIImage?
     var artist: String?
-    var image: UIImage?
+    var artistImage: UIImage?
     var duration: Int?
     var progress: Float?
     var isPlaying: Bool?
+}
+
+enum MusicImageType: String {
+    case album
+    case artist
 }
 
 class MusicService: MusicServiceProtocol, LoggerProtocol {
@@ -54,7 +60,9 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
     private var cancellables: Set<AnyCancellable> = []
 
     private var currentAlbumImageURL: URL?
-    
+
+    private var currentArtistImageURL: URL?
+
     // MARK: - Public properties
 
     var trackInfo: TrackInfo?
@@ -193,6 +201,17 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
                 .map { $0.name }
                 .joined(separator: ", ")
             trackInfo?.artist = artistNames
+            
+            if let artistId = artists.first?.id {
+                fetchArtist(id: artistId) { artist in
+                    if let artistImageUrl = artist?.images?.largest?.url,
+                       artistImageUrl != self.currentArtistImageURL {
+                        self.currentArtistImageURL = artistImageUrl
+                        self.fetchImage(ofType: .artist, from: artistImageUrl)
+                    }
+                }
+            }
+            
         } else {
             trackInfo?.artist = nil
         }
@@ -200,7 +219,7 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         if let albumImageUrl = track.album?.images?.largest?.url,
             albumImageUrl != currentAlbumImageURL {
             currentAlbumImageURL = albumImageUrl
-            fetchTrackImage(from: albumImageUrl)
+            fetchImage(ofType: .album, from: albumImageUrl)
         }
 
         if let progressMS = progressMS,
@@ -217,20 +236,57 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         delegate?.musicServiceTrackInfoUpdated(self)
     }
     
-    private func fetchTrackImage(from url: URL) {
-        log("fetching track image")
+//    private func fetchTrackImage(from url: URL) {
+//        log("fetching track image")
+//        Alamofire.request(url).response { response in
+//            guard
+//                let data = response.data
+//            else {
+//                self.trackInfo?.albumImage = nil
+//                return
+//            }
+//
+//            let image = UIImage(data: data)
+//            self.trackInfo?.albumImage = image
+//            self.delegate?.musicServiceTrackInfoUpdated(self)
+//        }
+//    }
+    
+    private func fetchImage(ofType type: MusicImageType, from url: URL) {
+        log("fetching \(type.rawValue) image")
         Alamofire.request(url).response { response in
             guard
                 let data = response.data
             else {
-                self.trackInfo?.image = nil
+                self.trackInfo?.albumImage = nil
                 return
             }
             
             let image = UIImage(data: data)
-            self.trackInfo?.image = image
+            switch type {
+            case .album:
+                self.trackInfo?.albumImage = image
+            case .artist:
+                self.trackInfo?.artistImage = image
+            }
             self.delegate?.musicServiceTrackInfoUpdated(self)
         }
+    }
+    
+    private func fetchArtist(
+        id: String,
+        completion: @escaping (Artist?) -> Void
+    ) {
+        let spotifyUrl = "spotify:artist:\(id)"
+        spotify.api.artist(spotifyUrl)
+            .receive(on: RunLoop.main)
+            .sink(
+                receiveCompletion: {
+                    self.receiveCompletion($0) { completion(nil) }
+                },
+                receiveValue: { completion($0) }
+            )
+            .store(in: &cancellables)
     }
     
     private func receiveCompletion(
