@@ -236,24 +236,7 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         delegate?.musicServiceTrackInfoUpdated(self)
     }
     
-//    private func fetchTrackImage(from url: URL) {
-//        log("fetching track image")
-//        Alamofire.request(url).response { response in
-//            guard
-//                let data = response.data
-//            else {
-//                self.trackInfo?.albumImage = nil
-//                return
-//            }
-//
-//            let image = UIImage(data: data)
-//            self.trackInfo?.albumImage = image
-//            self.delegate?.musicServiceTrackInfoUpdated(self)
-//        }
-//    }
-    
     private func fetchImage(ofType type: MusicImageType, from url: URL) {
-        log("fetching \(type.rawValue) image")
         Alamofire.request(url).response { response in
             guard
                 let data = response.data
