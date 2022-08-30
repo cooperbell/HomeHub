@@ -25,7 +25,9 @@ struct TrackInfo {
     var albumName: String?
     var artist: String?
     var image: UIImage?
+    var duration: Int?
     var progress: Float?
+    var isPlaying: Bool?
 }
 
 class MusicService: MusicServiceProtocol, LoggerProtocol {
@@ -42,6 +44,7 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             object: nil)
 
         pollCurrentlyPlaying()
+        startSongProgressionInterpolationTimer()
     }
 
     // MARK: - Private properties
@@ -77,14 +80,23 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         }
     }
 
+    private func startSongProgressionInterpolationTimer() {
+        let delta = 0.1
+        Timer.scheduledTimer(withTimeInterval: delta, repeats: true) { timer in
+            self.updateTrackProgress(delta: delta)
+        }
+    }
+
     private func loadCurrentlyPlaying(
         completion: (() -> Void)? = nil
     ) {
         spotify.api
-            .currentPlayback(market: nil)
+            .currentPlayback()
             .receive(on: RunLoop.main)
             .sink(
-                receiveCompletion: self.receiveCompletion(_:),
+                receiveCompletion: {
+                    self.receiveCompletion($0) { completion?() }
+                },
                 receiveValue: {
                     self.handleCurrentlyPlayingContext($0) { completion?() }
                 }
@@ -92,15 +104,32 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             .store(in: &cancellables)
     }
     
+    private func updateTrackProgress(delta: Double) {
+        guard
+            trackInfo?.isPlaying ?? false,
+            let durationMS = trackInfo?.duration,
+            let progress = trackInfo?.progress
+        else {
+            return
+        }
+
+        let interpolatedProgress = self.calculateInterpolatedSongProgress(
+            progress: progress,
+            durationMS: durationMS,
+            delta: delta)
+        self.trackInfo?.progress = interpolatedProgress
+        self.delegate?.musicServiceTrackInfoUpdated(self)
+    }
+    
     private func handleCurrentlyPlayingContext(
-        _ currentlyPlaying: CurrentlyPlayingContext?,
+        _ currentlyPlayingContext: CurrentlyPlayingContext?,
         completion: @escaping () -> Void
     ) {
         if trackInfo == nil {
             trackInfo = TrackInfo()
         }
 
-        guard let currentlyPlaying = currentlyPlaying else {
+        guard let currentlyPlayingContext = currentlyPlayingContext else {
             healthy = true
             trackInfo = nil
             currentAlbumImageURL = nil
@@ -109,7 +138,7 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             return
         }
 
-        let item = currentlyPlaying.item
+        let item = currentlyPlayingContext.item
 
         guard
             let trackName = item?.name,
@@ -123,20 +152,24 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             return
         }
 
-        spotify.api.track(uri, market: nil)
+        spotify.api.track(uri)
             .receive(on: RunLoop.main)
             .sink(
-                receiveCompletion: self.receiveCompletion(_:),
+                receiveCompletion: {
+                    self.receiveCompletion($0) { completion() }
+                },
                 receiveValue: { track in
                     self.healthy = true
-                    let progressMS = currentlyPlaying.progressMS
+                    let progressMS = currentlyPlayingContext.progressMS
                     let durationMS = item?.durationMS
+                    let isPlaying = currentlyPlayingContext.isPlaying
 
                     self.updateTrackInfo(
                         track,
                         name: trackName,
                         progressMS: progressMS,
-                        durationMS: durationMS)
+                        durationMS: durationMS,
+                        isPlaying: isPlaying)
 
                     completion()
                 }
@@ -148,10 +181,12 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
         _ track: Track,
         name: String,
         progressMS: Int?,
-        durationMS: Int?
+        durationMS: Int?,
+        isPlaying: Bool?
     ) {
         trackInfo?.name = name
         trackInfo?.albumName = track.album?.name
+        trackInfo?.isPlaying = isPlaying
 
         if let artists = track.artists {
             let artistNames = artists
@@ -172,8 +207,10 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             let durationMS = durationMS,
             durationMS > 0 {
             let progress = Float(progressMS) / Float(durationMS)
+            trackInfo?.duration = durationMS
             trackInfo?.progress = progress
         } else {
+            trackInfo?.duration = nil
             trackInfo?.progress = nil
         }
 
@@ -197,16 +234,31 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
     }
     
     private func receiveCompletion(
-        _ completion: Subscribers.Completion<Error>
+        _ receivedCompletion: Subscribers.Completion<Error>,
+        completion: @escaping () -> Void
     ) {
-        guard case let .failure(error) = completion else {
+        guard case let .failure(error) = receivedCompletion else {
             return
         }
 
         healthy = false
         logError(error)
+        completion()
     }
 
+    private func calculateInterpolatedSongProgress(
+        progress: Float,
+        durationMS: Int,
+        delta: Double
+    ) -> Float {
+        let durationS = Float(durationMS) / 1000.0
+        let percentDelta = Float(100.0 / durationS)
+        let percentDeltaQuartered = (percentDelta * Float(delta)) / 100.0
+        let interpolatedProgress = progress + percentDeltaQuartered
+
+        return interpolatedProgress > 1.0 ? 1.0 : interpolatedProgress
+    }
+    
     private func wait(
         completion: @escaping (() -> Void)
     ) {
@@ -222,20 +274,23 @@ class MusicService: MusicServiceProtocol, LoggerProtocol {
             return
         }
         
-        spotify.api.authorizationManager.requestAccessAndRefreshTokens(
-            redirectURIWithQuery: url,
-            state: spotify.authorizationState
-        )
-        .receive(on: RunLoop.main)
-        .sink(receiveCompletion: { completion in
-            if case .failure(let error) = completion {
-                self.logError(error)
-            } else {
-                self.pollCurrentlyPlaying()
-            }
-        })
-        .store(in: &cancellables)
+        spotify
+            .api
+            .authorizationManager
+            .requestAccessAndRefreshTokens(
+                redirectURIWithQuery: url,
+                state: spotify.authorizationState
+            )
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { completion in
+                if case .failure(let error) = completion {
+                    self.logError(error)
+                } else {
+                    self.pollCurrentlyPlaying()
+                }
+            })
+            .store(in: &cancellables)
         
-        self.spotify.authorizationState = String.randomURLSafe(length: 128)
+        spotify.authorizationState = String.randomURLSafe(length: 128)
     }
 }

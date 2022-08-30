@@ -52,7 +52,7 @@ class AugustLockService: AugustLockServiceProtocol, LoggerProtocol {
 
     init(delegate: AugustLockServiceDelegate? = nil) {
         self.delegate = delegate
-        pollLockState()
+//        pollLockState()
     }
 
     // MARK: - Private properties
@@ -175,7 +175,6 @@ class AugustLockService: AugustLockServiceProtocol, LoggerProtocol {
             headers: headers).responseJSON { response in
             switch response.result {
             case let .success(value):
-                self.healthy = true
                 let json = value as? [String: Any]
                 completion(json)
             case let .failure(error):
