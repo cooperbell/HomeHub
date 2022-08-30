@@ -93,7 +93,7 @@ class MusicFullScreenViewController: UIViewController {
     }
     
     private func updateArtistImage() {
-        guard artistImageView.image != viewModel?.artistImage else {
+        guard artistImageView.image?.pngData() != viewModel?.artistImage?.pngData() else {
             return
         }
 
